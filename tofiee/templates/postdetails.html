@@ -1,0 +1,15 @@
+{% load static %}
+
+<div class="container">
+    <div class="row">
+      <div class="col-md-8 card mb-4  mt-3 left  top">
+        <div class="card-body">
+        <img src="{{ object.dp.url }}" alt="">
+          <h1>{% block title %} {{ object.title }} {% endblock title %}</h1>
+          <p class=" text-muted">{{ Member.username }} | {{ Member.date }}</p>
+          <p class="card-text ">{{ object.description | safe }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+<h1>We the Best!!</h1>

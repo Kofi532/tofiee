@@ -1,0 +1,63 @@
+<!-- edit_item.html -->
+<!DOCTYPE html>
+<html>
+    <style>
+.container {
+  width: 500px;
+  clear: both;
+}
+
+.container input {
+  width: 100%;
+  clear: both;
+}
+    </style>
+<head>
+    <title>Edit Item</title>
+</head>
+<body>
+    <h1>Edit Item</h1>
+    <div class="container">
+        <form action="/updaterecord/{{ object.id }}" enctype="multipart/form-data" method="post">
+            {% csrf_token %}
+            <label for="price">Price:</label>
+            <input type="number" name="price" value="{{ object.price }}"><br>
+            <label for="title">Title:</label>
+            <textarea name="title">{{ object.title }}</textarea><br>
+            <label for="region">Region:</label>
+            <input type="text" name="region" value="{{ object.region }}"><br>
+            <label for="city">City:</label>
+            <input type="text" name="city" value="{{ object.city }}"><br>
+            <label for="description">Description:</label>
+            <input type="text" name="description" value="{{ object.description }}"><br>
+            <label for="size">Size:</label>
+            <input type="text" name="size" value="{{ object.size }}"><br>
+            <label for="contact">Contact:</label>
+            <input type="text" name="contact" value="{{ object.contact }}"><br>
+            <label for="dp">DP:</label>
+            <input accept="image/" type="file" name="dp" value="{{ object.dp }}"><br>
+            <label for="pic1">Picture 1:</label>
+            <input accept="image/" type="file" name="pic1" value="{{ object.pic1 }}"><br>
+            <label for="pic2">Picture 2:</label>
+            <input accept="image/" type="file" name="pic2" value="{{ object.pic2 }}"><br>
+            <label for="pic3">Picture 3:</label>
+            <input accept="image/" type="file" name="pic3" value="{{ object.pic3 }}"><br>
+            <label for="pic4">Picture 4:</label>
+            <input accept="image/" type="file" name="pic4" value="{{ object.pic4 }}"><br>
+            <label for="pic5">Picture 5:</label>
+            <input accept="image/" type="file" name="pic5" value="{{ object.pic5 }}"><br>
+            <label for="pic6">Picture 6:</label>
+            <input accept="image/" type="file" name="pic6" value="{{ object.pic6 }}"><br>
+            <label for="rooms">Rooms:</label>
+            <input type="number" name="rooms" value="{{ object.rooms }}"><br>
+            <label for="bathrooms">Bathrooms:</label>
+            <input type="number" name="bathrooms" value="{{ object.bathrooms }}"><br>
+            <label for="utilities">Utilities:</label>
+            <input type="text" name="utilities" value="{{ object.utilities }}"><br>
+    
+            <button type="submit">Save</button>
+        </form>
+    
+    </div>
+</body>
+</html>

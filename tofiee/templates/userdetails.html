@@ -1,0 +1,254 @@
+{% load static %}
+<!-- <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>{% block title %}Tofiee{% endblock %}</title>
+<!-- <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'admin.css' %}" />
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+<style>
+.dot {
+  height: 15px;
+  width: 15px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  background-color: white;
+  border: 2px solid black;
+}
+
+.dott {
+  height: 15px;
+  width: 15px;
+  background-color: #3e0404;
+  border-radius: 50%;
+  display: inline-block;
+  border: 2px solid black;
+}
+/* Styling for the expanded image */
+.expanded-image {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.7);
+display: none;
+justify-content: center;
+align-items: center;
+z-index: 9999;
+}
+
+.expanded-image img {
+	max-width: 80%;
+	max-height: 80%;
+}
+
+</style>
+</head>
+<body>
+<div id="main_container">
+  <div id="header">
+    <div id="logo"> <a href="/"><img src="{% static 'tofie.jpg' %}" width="147" height="78" alt="" border="0" /></a> </div>
+    <div class="banner_adds"></div>
+    <nav>
+      <div class="menu">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/sell/">Sell </a></li>
+          <li><a href="/buy/">Buy </a></li>
+          <li><a href="/rent/">Rent</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          {% if user.is_authenticated %}
+            
+          <li class="nav-item">
+            <a class="nav-link" href="/user/">Hi {{ user.username }}!</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+              <a class="nav-link" href="{% url 'register' %}">Register</a>
+            </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/accounts/login/">Login</a>
+          </li>
+        {% endif %}
+        </ul>
+      </div>
+    </nav>
+
+  </div>
+  <div id="main_content">
+    <div class="column1">
+      <div class="left_box">
+        <div class="top_left_box"> </div>
+        <div class="center_left_box">
+          <div class="box_title">Your item<span></span> status:</div>
+          {% if object.document_a == 1 %}
+          <div style="display: flex; margin-left: 10%;"><span class="dott" ></span><span>. Viewed by Team</span></div>
+          {% else %}
+          <div style="display: flex; margin-left: 10%;"><span class="dot" ></span><span>. Viewed by Team</span></div>
+          {% endif %}
+          <br>
+          {% if object.document_b == 1 %}
+          <div style="display: flex; margin-left: 10%;"><span class="dott" ></span><span>. Documents Approved</span></div>
+          {% else %}
+          <div style="display: flex; margin-left: 10%;"><span class="dot" ></span><span>. Documents Approved</span></div>
+          {% endif %}
+          <br>
+          {% if object.document_c == 1 %}
+          <div style="display: flex; margin-left: 10%;"><span class="dott" ></span><span>. Verified</span></div>
+          {% else %}
+          <div style="display: flex; margin-left: 10%;"><span class="dot" ></span><span>. Verified</span></div>
+          {% endif %}
+        </div>
+        <div class="bottom_left_box"> </div>
+      </div>
+      <div class="left_box">
+        <div class="top_left_box"> </div>
+        <div class="center_left_box">
+          <div class="box_title"><span>Join</span> our newsletter:</div>
+          <div class="form">
+            <div class="form_row">
+              <a class="left" href="">Yes i want to.</a>
+            </div>
+
+          </div>
+        </div>
+        <div class="bottom_left_box"> </div>
+      </div>
+      <div class="left_box">
+        <div class="top_left_box"> </div>
+        <div class="center_left_box">
+          <div class="box_title"><span>Contact</span> information:</div>
+          <div class="form">
+            <div class="form_row"> <img src="images/contact_envelope.gif" width="50" height="47" border="0" class="img_right" alt="" />
+              <div class="contact_information"> Email: info@comapnyname.com<br />
+                Telephone: 0234 789 90<br />
+                Mobile: 234 345 234534<br />
+                Fax: 34534 3456 3456(54)<br />
+                <br />
+                <span>www.companyname.com</span> </div>
+            </div>
+          </div>
+        </div>
+        <div class="bottom_left_box"> </div>
+      </div>
+    </div>
+    <!-- end of column one -->
+    <main>
+        <div class="column4">
+            <div class="title">Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet </div>
+          </div>
+          <!-- end of column four -->
+          <div class="column2" style="background-color:#f3f5f6; margin-left:5px;">
+            <div class="big_pic"><img src="{{ object.dp.url }}" onclick="expandImage(this)" width="282" height="212" alt="" class="img_big_pic" /></div>
+            <div class="expanded-image" onclick="closeExpandedImage()">
+                <img id="expanded-img" src="" alt="Expanded Image">
+            </div>
+            <div class="pictures_thumbs">
+              <h3>Pictures available:</h3>
+              <a href="#"><img src="{{ object.pic1.url }}" onclick="expandImage(this)" width="104" height="78" border="0" alt="" class="img_thumb" /></a> <a href="#"><img src="{{ object.pic2.url }}" onclick="expandImage(this)" width="104" height="78" border="0" alt="" class="img_thumb" /></a> <a href="#"><img src="{{ object.pic3.url }}" onclick="expandImage(this)" width="104" height="78" border="0" alt="" class="img_thumb" /></a> <a href="#"><img src="{{ object.pic4.url }}" onclick="expandImage(this)" width="104" height="78" border="0" alt="" class="img_thumb" /></a> <a href="#"><img src="{{ object.pic5.url }}" onclick="expandImage(this)" width="104" height="78" border="0" alt="" class="img_thumb" /></a> <a href="#"><img src="{{ object.pic6.url }}" onclick="expandImage(this)" width="104" height="78" border="0" alt="" class="img_thumb" /></a> </div>
+          </div>
+          <!-- end of column two -->
+          <div class="column3">
+            <div class="main_text_box">
+              <h1>Description</h1>
+              <p>{{ object.description }}&quot;</p>
+              
+                        <br />
+            </div>
+            <div class="title2">Details:</div>
+            <div class="details_list">
+              <ul>
+                <li><span>Price: GHC</span> {{ object.price }} </li>
+                <li><span>City:</span> {{ object.location }} </li>
+                <li><span>Rooms:</span> {{ object.rooms }}</li>
+                <li><span>Bathrooms:</span> {{ object.bathrooms }}</li>
+                <li><span>Other utilities:</span> {{ object.bathrooms }}</li>
+              </ul>
+            </div>
+
+            <!-- end of column three -->
+          </div>
+          <!-- end of main_content -->
+        
+    </main>
+    <!-- end of main_content -->
+    <div id="footer">
+        <div id="copyright">
+          <div style="float:left; padding:3px;"><a href="#"><img src="images/footer_logo.gif" width="42" height="35" alt="" border="0" /></a></div>
+          <div style="float:left; padding:14px 10px 10px 10px;"> Company name.&copy; All Rights Reserved 2008 - By <a href="http://csscreme.com" style="color:#772c17;">csscreme</a></div>
+        </div>
+        <ul class="footer_menu">
+          <li><a href="#" class="nav_footer"> Home </a></li>
+          <li><a href="#" class="nav_footer"> Selling Homes </a></li>
+          <li><a href="#" class="nav_footer"> Buying Homes </a></li>
+          <li><a href="#" class="nav_footer"> Renting Homes</a></li>
+          <li><a href="#" class="nav_footer"> RSS </a></li>
+          <li><a href="#" class="nav_footer"> Contact </a></li>
+        </ul>
+      </div>
+  </div>
+<!-- end of main_container -->
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        const districts = {
+            greateraccra: ['Tema Metropolitan', 'Ablekuma Central Municipal', 'Ablekuma North Municipal', 'Ablekuma West Municipal', 'Adenta Municipal', 'Ashaiman Municipal', 'Ayawaso Central Municipal', 'Ayawaso East Municipal', 'Ayawaso North Municipal', 'Ayawaso West Municipal', 'Ga South Municipal', 'Ga Central Municipal', 'Ga East Municipal', 'Ga North Municipal', 'Ga West Municipal', 'Korle Klottey Municipal', 'Kpone Katamanso Municipal', 'Krowor Municipal', 'La Dade-Kotopon Municipal', 'La-Nkwantanang Municipal', 'Ledzokuku Municipal', 'Okaikwei North Municipal', 'Tema West Municipal', 'Weija-Gbawe Municipal', 'Ada East District', 'Ada West District', 'Ningo-Prampram District', 'Shai-Osudoku District'],
+            ashanti: ['Kumasi Metropolitan', ' Ahafo Ano North Municipal', ' Asante Akim Central Municipal', ' Asante Akim South Municipal', ' Asokore Mampong Municipal', ' Asokwa Municipal', ' Atwima Nwabiagya Municipal', ' Bekwai Municipal', ' Ejisu Municipal', ' Ejura Sekyredumasi Municipal', ' Juaben Municipal', ' Kwabre East Municipal', ' Kwadaso Municipal', ' Mampong Municipal', ' Obuasi Municipal', ' Offinso Municipal', ' Oforikrom Municipal', ' Old Tafo Municipal', ' Suame Municipal', ' Adansi Asokwa District', ' Adansi North District', ' Adansi South District', ' Afigya Kwabre North District', ' Afigya Kwabre South District', ' Ahafo Ano South East District', ' Ahafo Ano South West District', 'Akrofuom District', 'Amansie Central District', 'Amansie South District', 'Amansie West District', 'Asante Akim North District', 'Atwima Kwanwoma District', 'Atwima Mponua District', 'Atwima', 'Nwabiagya North District', 'Bosome Freho District', 'Bosomtwe District', 'Obuasi East District', 'Offinso North District', 'Sekyere Afram Plains District', 'Sekyere Central District', 'Sekyere East District', 'Sekyere Kumawu District', 'Sekyere South District'],
+            ahafo: ['Goaso', 'Asutifi North District', 'Tano South Municipal', 'Asutifi South District', 'Asunafo South District', 'Tano North Municipal', ' Asunafo North Municipal'],
+            bonoeast: ['Atebubu Amantin Municipal', 'Atebubu', 'Kintampo North Municipal', 'Nkoranza South Municipal', 'Techiman Municipal', 'Sene West District', 'Pru East District', 'Kintampo South District', 'Nkoranza North District', 'Techiman', 'North District', 'Sene East District', 'Pru West District'],
+            bono: ['Berekum East Municipal', 'Dormaa Central Municipal', 'Jaman South Municipal', 'Sunyani Municipal', 'Wenchi Municipal', 'Tain District', 'Jaman North District', 'Sunyani West District', 'Dormaa East District', 'Banda District', 'Dormaa West District', 'Berekum West District'],
+            central: ['Cape Coast Metropolitan', 'Agona West Municipal', 'Assin Fosu Municipal', 'Awutu Senya East Municipal', 'Effutu Municipal', 'Komenda-Edina-Eguafo-Abrim Municipal', 'Mfantsiman Municipal', 'Upper Denkyira East Municipal', 'Abura/ Asebu/ Kwamankese District', 'Agona East District', 'Ajumako/Enyan/Esiam District', 'Asikuma-Odoben-Brakwa-Breman District', 'Assin North District', 'Assin South District', 'Awutu Senya District', 'Ekumfi District', 'Gomoa Central District', 'Gomoa East District', 'Gomoa West District', 'Hemang Lower Denkyira District', 'Twifu Ati Morkwa District', 'Upper Denkyira West District'],
+            eastern: ['Abuakwa South Municipal', 'Akwapim North Municipal', 'Birim Central Municipal', 'Kwaebibirem Municipal', 'Kwahu West Municipal', 'Lower Manya Krobo Municipal', 'New Juaben North Municipal', 'New Juaben South Municipal', 'Nsawam Adoagyiri Municipal', 'Suhum Municipal', 'West Akim Municipal', 'Yilo Krobo Municipal', 'Achiase District', 'Akuapem South District', 'Akyemansa District', 'Asene-Manso-Akroso District', 'Asuogyaman District', 'Atiwa East District', 'Atiwa West District', 'Ayensuano District', 'Birim North District', 'Birim South District', 'Denkyembuor District', 'Fanteakwa North District', 'Fanteakwa South District', 'Kwahu Afram Plains North District', 'Kwahu Afram Plains South District', 'Kwahu East District', 'Kwahu South District', 'Okere District', 'Upper Manya Krobo District', 'Upper West Akim District'],
+            northern: ['Tamale Metropolitan', 'Gushegu Municipal', 'Nanumba North Municipal', 'Sagnerigu Municipal', 'Savelugu Municipal', 'Yendi Municipal', 'Karaga District', 'Kpandai District', 'Kumbungu District', 'Mion District', 'Nanton District', 'Nanumba South District', 'Saboba District', 'Tatale Sanguli District', 'Tolon District', 'Zabzugu District'],            
+            northeast: ['East Mamprusi Municipal', 'West Mamprusi Municipal', 'Bunkpurugu Nakpanduri District', 'Chereponi District', 'Mamprugu Moagduri District', 'Yunyoo Nasuan District'],
+            oti: ['KRACHI EAST MUNICIPAL', 'NKWANTA SOUTH MUNICIPAL', 'BIAKOYE DISTRICT', 'JASIKAN DISTRICT', 'KADJEBI DISTRICT', 'KRACHI NCHUMURU DISTRICT', 'KRACHI WEST DISTRICT', 'NKWANTA NORTH DISTRICT', 'GUAN DISTRICT'],
+            savannah: ['Bole District', 'East Gonja Municipal', 'West Gonja District', 'Sawla Tuna Kalba District', 'Central  Gonja District', 'North Gonja District', 'North East Gonja District'],
+            uppereast: ['BAWKU MUNICIPAL', 'BOLGATANGA MUNICIPAL', 'KASSENA NANKANA EAST MUNICIPAL', 'BAWKU WEST DISTRICT', 'BINDURI DISTRICT', 'BOLGATANGA EAST DISTRICT', 'BONGO DISTRICT', 'BUILSA NORTH DISTRICT', 'BUILSA SOUTH DISTRICT', 'GARU DISTRICT', 'KASSENA NANKANA WEST DISTRICT', 'NABDAM DISTRICT', 'PUSIGA DISTRICT', 'TALENSI DISTRICT', 'TEMPANE DISTRICT'],
+            upperwest: ['WA MUNICIPAL', 'JIRAPA MUNICIPAL', 'LAWRA MUNICIPAL', 'SISSALA EAST MUNICIPAL', 'DAFIAMA BUSSIE ISSA DISTRICT', 'LAMBUSSIE DISTRICT', 'NANDOM DISTRICT', 'NADOWLI/KALEO DISTRICT', 'SISSALA WEST DISTRICT', 'WA EAST DISTRICT', 'WA WEST DISTRICT'],
+            volta: ['ADAKLU DISTRICT', 'AFADZATO SOUTH DISTRICT', 'AGOTIME-ZIOPE DISTRICT', 'AKATSI NORTH DISTRICT', 'AKATSI SOUTH DISTRICT', 'ANLOGA DISTRICT', 'CENTRAL TONGU DISTRICT', 'HO MUNICIPAL', 'HO WEST DISTRICT', 'HOHOE MUNICIPAL', 'KETA MUNICIPAL', 'KETU NORTH MUNICIPAL', 'KETU SOUTH MUNICIPAL', 'KPANDO MUNICIPAL', 'NORTH DAYI DISTRICT', 'NORTH TONGU DISTRICT', 'SOUTH DAYI DISTRICT', 'SOUTH TONGU DISTRICT'],
+            westernnorth: ['AOWIN MUNICIPAL', 'BIBIANI ANHWIASO BEKWAI MUNICIPAL', 'SEFWI WIAWSO MUNICIPAL', 'BIA EAST DISTRICT', 'BIA WEST DISTRICT', 'BODI DISTRICT', 'JUABOSO DISTRICT', 'SEFWI AKONTOMBRA DISTRICT', 'SUAMAN DISTRICT'],
+            western: ['AHANTA WEST MUNICIPAL', 'AMENFI CENTRAL DISTRICT', 'WASSA AMENFI EAST MUNICIPAL', 'AMENFI WEST MUNICIPAL', 'EFFIA KWESIMINTSIM MUNICIPAL', 'ELLEMBELLE DISTRICT', 'JOMORO MUNICIPAL', 'MPOHOR DISTRICT', 'NZEMA EAST MUNICIPAL', 'PRESTEA HUNI-VALLEY MUNICIPAL', 'SEKONDI-TAKORADI METROPOLITAN', 'SHAMA DISTRICT', 'TARKWA NUSAEM MUNICIPAL', 'WASSA EAST DISTRICT'],
+            // Add more districts for other regions
+        };
+
+        const regionSelect = document.getElementById('region');
+        const districtSelect = document.getElementById('district');
+
+        regionSelect.addEventListener('change', function () {
+            const selectedRegion = regionSelect.value;
+            const selectedDistricts = districts[selectedRegion];
+
+            districtSelect.innerHTML = ''; // Clear previous options
+
+            for (const district of selectedDistricts) {
+                const option = document.createElement('option');
+                option.value = district.toLowerCase();
+                option.textContent = district;
+                districtSelect.appendChild(option);
+            }
+        });
+    });
+
+    function expandImage(img) {
+        var expandedImg = document.getElementById("expanded-img");
+        expandedImg.src = img.src;
+        var expandedImageContainer = document.querySelector(".expanded-image");
+        expandedImageContainer.style.display = "flex";
+    }
+
+    function closeExpandedImage() {
+        var expandedImageContainer = document.querySelector(".expanded-image");
+        expandedImageContainer.style.display = "none";
+    }
+</script>
+
+</html>

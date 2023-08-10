@@ -1,0 +1,23 @@
+<!-- base.html -->
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <!-- Common header content goes here -->
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <!-- Common footer content goes here -->
+    </footer>
+</body>
+</html>

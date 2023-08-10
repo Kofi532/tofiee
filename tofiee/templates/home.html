@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+ {% block content %}
+            <!-- end of column one -->
+    <div class="column2">
+        <div class="main_text_box">
+          <h2>About Us</h2>
+          <p> &quot;We provide credible online real estate platform for our customers to find a comfortable home to buy in Africa
+            and also help increase sales for the real estate developers.
+            We also make sure that, serving humanity is centered in our heart, in order to give customers quality customer
+            services in the real estate market.
+            <br>
+            A. We give our clients easy access transport services to help them convey their properties to their new homes.
+            <br>
+            B. We help our customers solve their domestic problems such as house cleaning, house
+            helps and many more.
+            <br>
+            C. We help our customers to avoid irrelevant spending liking viewing fee which is charged by the other
+            middlemen in the industry. <br />
+          </p>
+        </div>
+        <div class="main_text_box">
+          <br>
+          <br>
+          <h2>Vision</h2>
+          <p> &quot;We are the most trustworthy and credible real estate company that provides comfortable and affordable housing
+            for high, middle and low-income earners in the next five years of business activities.
+            <br>
+            Tofiee.com will be the only platform to serve the real estate market that investors around the world who wants
+            to invest and acquire a property in Africa will trust to do business with. Also, tofiee.com will solve the problem
+            of land litigation in the African continent.            
+          </p>
+        </div>
+        </div>
+      </div>
+      <!-- end of column two -->
+      <div class="column3">
+        <div class="small_title">Latest offers</div>
+        {% for i in member %}
+        <div  class="offer_box"> <a href="#"><img src="{{ i.dp.url }}" width="130" height="98" class="img_left" alt="image" border="0" /></a>
+          <div  class="offer_info"> <span>GHC {{ i.price }}</span>
+              <p  class="offer">Location: {{ i.city }}, {{ i.region }} </p>
+            <p  class="offer" style="overflow: hidden;"> &quot;{{ i.title }}&quot; </p>
+            <div class="more"><a href="{% url 'post_detail' i.slug  %}">...more</a></div>
+  
+          </div>
+        </div>
+
+        
+        {% endfor %} 
+      </div>
+      <!-- end of column three -->
+      <div class="column4">
+        <div class="title">Special Offers</div>
+        <div class="offer_box_wide"> <a href="#"><img src="images/p1.jpg" width="130" height="98" class="img_left" alt="" border="0" /></a>
+          <div class="offer_info"> <span>For Sale 150 000 $</span>
+            <p class="offer"> &quot;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&quot; </p>
+            <div class="more"><a href="#">...more</a></div>
+          </div>
+        </div>
+        <div class="offer_box_wide"> <a href="#"><img src="images/p2.jpg" width="130" height="98" class="img_left" alt="" border="0" /></a>
+          <div class="offer_info"> <span>For Sale 220 000 $</span>
+            <p class="offer"> &quot;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&quot; </p>
+            <div class="more"><a href="#">...more</a></div>
+          </div>
+        </div>
+        <div class="offer_box_wide"> <a href="#"><img src="images/p1.jpg" width="130" height="98" class="img_left" alt="" border="0" /></a>
+          <div class="offer_info"> <span>For Sale 150 000 $</span>
+            <p class="offer"> &quot;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&quot; </p>
+            <div class="more"><a href="#">...more</a></div>
+          </div>
+        </div>
+        <div class="offer_box_wide"> <a href="#"><img src="images/p2.jpg" width="130" height="98" class="img_left" alt="" border="0" /></a>
+          <div class="offer_info"> <span>For Sale 220 000 $</span>
+            <p class="offer"> &quot;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.&quot; </p>
+            <div class="more"><a href="#">...more</a></div>
+          </div>
+        </div>
+      </div>
+      <!-- end of column four -->
+    </div>
+    <!-- end of main_content -->
+
+        {% endblock %}

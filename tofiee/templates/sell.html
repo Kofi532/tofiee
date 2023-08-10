@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+
+<div class="column4">
+    <div class="title" style="float:left;">
+      <div style="float:left;">Selling Properties</div>
+      <!-- <div style="float:right; font-size:10px;color:#d8325d;padding-top:2px;">display: <a href="list2.html"><img src="images/list_style3.gif" border="0" /></a> <a href="list1.html"><img src="images/list_style1.gif" border="0" /></a> <a href="list.html"><img src="images/list_style2_a.gif" border="0" /></a> </div> -->
+    </div>
+    {% for i in member %}
+    <div class="offer_box_wide"> <a href="#"><img src="{{ i.dp.url }}" width="130" height="98" class="img_left" alt="" border="0"/></a>
+      <div class="offer_info"> <span>GHC {{ i.price }} </span>
+        <p class="offer"> {{ i.city }}, {{ i.region }}</p>
+        <p class="offer"> {{ i.description }}</p>
+        <div class="more"><a href="{% url 'post_detail' i.slug  %}">...more</a></div>
+      </div>
+    </div>
+    {% endfor %}
+
+    {% endblock %}
