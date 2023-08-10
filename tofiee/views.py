@@ -137,6 +137,8 @@ def user_form(request):
             event.region = output_string
             event.city = capitalized_string
             form.save()
+
+            
             # price = form.cleaned_data['price']
             # title = form.cleaned_data['title']
             # region = form.cleaned_data['region']
