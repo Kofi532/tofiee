@@ -7,9 +7,26 @@
 <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
 <link rel="stylesheet" type="text/css" href="{% static 'admin.css' %}" />
 <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+
+<style>
+.popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+}
+</style>
 </head>
 <body>
+  <h1>How is it?</h1>
 <div id="main_container">
+  <h1>All is well.</h1>
   <div id="header">
     <div id="logo"> <a href="/"><img src="{% static 'tofie.jpg' %}" width="147" height="78" alt="" border="0" /></a> </div>
     <div class="banner_adds"></div>
@@ -17,11 +34,11 @@
       <div class="menu">
         <ul>
           <li><a href="/">Home</a></li>
-          <li><a href="/sell/">Sell </a></li>
+          <li><a href="/sell/">Funding</a></li>
           <li><a href="/buy/">Buy </a></li>
           <li><a href="/rent/">Rent</a></li>
           <li><a href="#">FAQ</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="#">Contact</a></li>
           {% if user.is_authenticated %}
             
           <li class="nav-item">
@@ -97,14 +114,11 @@
                   <label class="left_long">Looking for to:</label>
                 </div>
                 <div class="form_row">
-                  <input value="sell" type="radio" name="reason"/>
-                  sell</div>
-                <div class="form_row">
                   <input value="buy" type="radio" name="reason"/>
-                  buy</div>
+                  Buy</div>
                 <div class="form_row">
                   <input value="rent" type="radio" name="reason"/>
-                  rent</div>
+                  Rent</div>
                 <div style="float:right; padding:10px 25px 0 0;">
                     <!-- <button type="submit">find</button> -->
                   <input type="submit" src=""/>
@@ -121,7 +135,11 @@
           <div class="box_title"><span>Join</span> our newsletter:</div>
           <div class="form">
             <div class="form_row">
-              <a class="left" href="">Yes i want to.</a>
+              <a id="showPopupBtn" class="left" href="#">Yes i want to.</a>
+              <div id="popup" class="popup">
+                <p>Thank you for subscribing.</p>
+                <button id="closePopupBtn">Close</button>
+            </div>
             </div>
 
           </div>
@@ -167,10 +185,27 @@
         </ul>
       </div>
   </div>
+</div>
 <!-- end of main_container -->
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+          document.addEventListener('DOMContentLoaded', function () {
+            const showPopupBtn = document.getElementById('showPopupBtn');
+            const closePopupBtn = document.getElementById('closePopupBtn');
+            const popup = document.getElementById('popup');
+
+            // Show the pop-up box
+            showPopupBtn.addEventListener('click', function () {
+                popup.style.display = 'block';
+            });
+
+            // Close the pop-up box
+            closePopupBtn.addEventListener('click', function () {
+                popup.style.display = 'none';
+            });
+        });
+
     $(document).ready(function () {
         const districts = {
           greater_accra: ['Tema Metropolitan', 'Ablekuma Central Municipal', 'Ablekuma North Municipal', 'Ablekuma West Municipal', 'Adenta Municipal', 'Ashaiman Municipal', 'Ayawaso Central Municipal', 'Ayawaso East Municipal', 'Ayawaso North Municipal', 'Ayawaso West Municipal', 'Ga South Municipal', 'Ga Central Municipal', 'Ga East Municipal', 'Ga North Municipal', 'Ga West Municipal', 'Korle Klottey Municipal', 'Kpone Katamanso Municipal', 'Krowor Municipal', 'La Dade-Kotopon Municipal', 'La-Nkwantanang Municipal', 'Ledzokuku Municipal', 'Okaikwei North Municipal', 'Tema West Municipal', 'Weija-Gbawe Municipal', 'Ada East District', 'Ada West District', 'Ningo-Prampram District', 'Shai-Osudoku District'],

@@ -24,7 +24,12 @@
 }
 </style>
 <div class="column4">
-    <div class="title">Item details </div>
+  {% if object.category == 'sell' %}
+    <div class="title">For Sale: {{ object.title }}</div>
+    {% elif object.category == 'rent' %}
+    <div class="title">For Rent: {{ object.title }}</div>
+    {% else %}
+    {% endif %}
   </div>
   <!-- end of column four -->
   <div class="column2" style="background-color:#f3f5f6; margin-left:5px;">
@@ -40,6 +45,7 @@
   <div class="column3">
     <div class="main_text_box">
       <h1>Description</h1>
+      <p><b>Location: {{ object.city }}, {{ object.region }} Region </b></p>
       <p>{{ object.description }}&quot;</p>
       
                 <br />
@@ -48,7 +54,13 @@
     <div class="details_list">
       <ul>
         <li><span>Price: GHC</span> {{ object.price }} </li>
-        <li><span>City:</span> {{ object.location }} </li>
+        {% if object.category == 'rent' %}
+        <li><span>Available from</span> {{ object.availability_from }} to {{ object.availability_to }}</li>
+
+        {% else %}
+        {% endif %}
+        <li><span>District:</span> {{ object.city }} </li>
+        <li><span>Town:</span> {{ object.town }} </li>
         <li><span>Rooms:</span> {{ object.rooms }}</li>
         <li><span>Bathrooms:</span> {{ object.bathrooms }}</li>
         <li><span>Other utilities:</span> {{ object.bathrooms }}</li>

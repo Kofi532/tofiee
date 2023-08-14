@@ -4,15 +4,17 @@ from multiselectfield import MultiSelectField
 from django.utils.text import slugify
 import uuid
 
+
 # Create your models here.
 class Member(models.Model):
   username = models.CharField(max_length=15, default='none')
   price = models.FloatField()
-  title = models.CharField(max_length=25)
+  title = models.CharField(max_length=100)
   region = models.CharField(max_length=25, default='none')
-  city = models.CharField(max_length=25, default='none')
+  city = models.CharField(max_length=50, default='none')
+  town = models.CharField(max_length=50, default='none')
   description = models.CharField(max_length=1000, blank=True)
-  date = models.DateTimeField(default=datetime.now())
+  date = models.DateField(default=datetime.now())
   size = models.CharField(max_length=50, default='none', blank=True)
   contact = models.CharField(max_length=10, blank=True)
   dp = models.ImageField(upload_to='images/',default='default.jpg', blank=True)
@@ -32,6 +34,10 @@ class Member(models.Model):
   document_a = models.FloatField(max_length=100, default=0)
   document_b = models.FloatField(max_length=100, default=0)
   document_c = models.FloatField(max_length=100, default=0)
+  availability_from = models.DateField(max_length=100, default=datetime.now(),  blank=True)
+  availability_to = models.DateField(max_length=100, default=datetime.now(), blank=True)
+
+
   def __str__(self):
     return self.username
 

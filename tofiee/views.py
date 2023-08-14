@@ -121,6 +121,8 @@ def user_form(request):
     if request.user.is_authenticated:
          usernamed = request.user.username
     if request.method == 'POST':
+        rent_from = request.POST['availability_from']
+        rent_to = request.POST['availability_to']
         city = request.POST['district']
         region = request.POST['regional']
         form = memberf(request.POST, request.FILES)
@@ -136,9 +138,11 @@ def user_form(request):
             capitalized_string = ' '.join(capitalized_city)
             event.region = output_string
             event.city = capitalized_string
+            event.availability_to = rent_to
+            event.availability_from = rent_from
             form.save()
 
-            
+
             # price = form.cleaned_data['price']
             # title = form.cleaned_data['title']
             # region = form.cleaned_data['region']
@@ -178,7 +182,7 @@ def update(request, id):
 def updaterecord(request, id):
   price = request.POST['price']
   title = request.POST['title']
-  region = request.POST['region']
+  region = request.POST['regional']
   city = request.POST['city']
   description = request.POST['description']
   size = request.POST['size']
@@ -191,8 +195,12 @@ def updaterecord(request, id):
   pic5 = request.FILES['pic5']
   pic6 = request.FILES['pic6']
   rooms = request.POST['rooms']
+  category = request.POST['category']
   bathrooms = request.POST['bathrooms']
   utilities = request.POST['utilities']
+  town = request.POST['town']
+  availability_from = request.POST['availability_from']
+  availability_to = request.POST['availability_to']
   member = Member.objects.get(id=id)
   member.price = price
   member.title = title
@@ -210,7 +218,10 @@ def updaterecord(request, id):
   member.pic6=pic6
   member.rooms=rooms
   member.bathrooms=bathrooms
+  member.category=category
   member.utilities=utilities
+  member.availability_from= availability_from
+  member.availability_to=availability_to
 
   member.save()
   return HttpResponseRedirect(reverse('user'))
