@@ -67,7 +67,7 @@ def first(request):
         lol
     member = Member.objects.all().order_by('-date')[:2]
     members = Member.objects.all().order_by('-date')[:10]
-    return render (request=request, template_name="home.html", context={"member":member, "members":members})
+    return render (request=request, template_name="index.html", context={"member":member, "members":members})
 
 class Memberview(CreateView): 
     model = Member
