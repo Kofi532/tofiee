@@ -29,11 +29,14 @@ urlpatterns = [
     path("buy/", tf.buy, name="buy"),
     path("rent/", tf.rent, name="rent"),
     path("user/", tf.user, name="user"),
+    path("boss/", tf.boss, name="boss"),
     path("register/", tf.register_request, name="register"),
     path("userinput/", tf.user_form, name="userinput"),
     path("p/", Memberview.as_view(), name='approve'),
     path('', include('tofiee.urls')),
     path('delete/<int:record_id>/', tf.delete_record, name='delete_record'),
+    path('approve/<int:record_id>/', tf.approve_record, name='approve_record'),
+
 ]
 
 if settings.DEBUG:

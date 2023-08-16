@@ -9,7 +9,7 @@ import uuid
 class Member(models.Model):
   username = models.CharField(max_length=15, default='none')
   price = models.FloatField()
-  title = models.CharField(max_length=100)
+  title = models.CharField(max_length=50)
   region = models.CharField(max_length=25, default='none')
   city = models.CharField(max_length=50, default='none')
   town = models.CharField(max_length=50, default='none')

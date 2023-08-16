@@ -9,8 +9,9 @@
     </div>
     {% for i in member %}
     <div class="offer_box_wide"> <a href="#"><img src="{{ i.dp.url }}" width="130" height="98" class="img_left" alt="" border="0"/></a>
-      <div class="offer_info"> <span>For Sale GHC {{ i.price }} at {{ i.location }}</span>
-        <p class="offer"> {{ i.description }}</p>
+      <div class="offer_info"> <span>For Sale GHC {{ i.price }}</span>
+        <p class="titl"> {{ i.city }}, {{ i.region }}</p>
+        <p class="titl"> {{ i.description|truncatewords:7  }}</p>
         <div class="more"><a href="{% url 'post_detail' i.slug  %}">...more</a></div>
       </div>
     </div>

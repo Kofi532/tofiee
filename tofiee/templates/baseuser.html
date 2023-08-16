@@ -5,8 +5,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>{% block title %}Tofiee{% endblock %}</title>
+<link rel="icon" type="image/png" href="{% static 'tofie.jpg' %}">
+
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'astyle.css' %}" />
 <link rel="stylesheet" type="text/css" href="{% static 'admin.css' %}" />
 </head>
 <body>
@@ -30,15 +32,13 @@
   <div id="footer">
     <div id="copyright">
       <div style="float:left; padding:3px;"><a href="#"><img src="{% static 'tofie.jpg' %}" width="42" height="35" alt="" border="0" /></a></div>
-      <div style="float:left; padding:14px 10px 10px 10px;"> Company name.&copy; All Rights Reserved 2008 - By <a href="http://csscreme.com" style="color:#772c17;">csscreme</a></div>
+      <div style="float:left; padding:14px 10px 10px 10px;"> Tofiee.&copy; All Rights Reserved 2008 - By <a href="http://tofieegh.com" style="color:#772c17;">Tofiee</a></div>
     </div>
     <ul class="footer_menu">
-      <li><a href="#" class="nav_footer"> Home </a></li>
-      <li><a href="#" class="nav_footer"> Selling Homes </a></li>
-      <li><a href="#" class="nav_footer"> Buying Homes </a></li>
-      <li><a href="#" class="nav_footer"> Renting Homes</a></li>
-      <li><a href="#" class="nav_footer"> RSS </a></li>
-      <li><a href="#" class="nav_footer"> Contact </a></li>
+      <li><a href="/" class="nav_footer"> Home </a></li>
+      <li><a href="/rent/" class="nav_footer"> Renting  </a></li>
+      <li><a href="/buy/" class="nav_footer"> Buying  </a></li>
+      <li><a href="/sell/" class="nav_footer"> Funding</a></li>
     </ul>
   </div>
 </div>

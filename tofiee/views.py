@@ -65,8 +65,9 @@ def first(request):
         cityquery = pd.DataFrame(Member.objects.values().filter(city__in=citying).filter(price__gte=20, price__lte=80).filter(rooms=3))
 		
         lol
-    member = Member.objects.all().order_by('-date')[:3]
-    return render (request=request, template_name="home.html", context={"member":member})
+    member = Member.objects.all().order_by('-date')[:2]
+    members = Member.objects.all().order_by('-date')[:10]
+    return render (request=request, template_name="home.html", context={"member":member, "members":members})
 
 class Memberview(CreateView): 
     model = Member
@@ -107,12 +108,32 @@ def register_request(request):
 	return render (request=request, template_name="register.html", context={"register_form":form})
 
 def user(request):
-    member = Member.objects.all().order_by('-date')
-    return render (request=request, template_name="user.html", context={"member":member})
+    if request.user.is_authenticated:
+        username = request.user.username
+
+        member = Member.objects.all().filter(username= username).order_by('-date')
+        return render (request=request, template_name="user.html", context={"member":member})
+    else:
+        return HttpResponse("Hello, guest! Please login to continue")
+    
+def boss(request):
+    username = request.user.username
+    if username == 'kofiadukpo':
+        
+        member = Member.objects.all().order_by('-date')
+        return render (request=request, template_name="boss.html", context={"member":member})
+    else:
+        return HttpResponse("Hello, guest! Please login to continue")
 
 def delete_record(request, record_id):
     record = get_object_or_404(Member, pk=record_id)
     record.delete()
+    return redirect('user') 
+
+def approve_record(request, record_id):
+    record = get_object_or_404(Member, pk=record_id)
+    record.active= '1'
+    record.save()
     return redirect('user') 
 
 def user_form(request):
@@ -121,6 +142,7 @@ def user_form(request):
     if request.user.is_authenticated:
          usernamed = request.user.username
     if request.method == 'POST':
+        cat = request.POST['category']
         rent_from = request.POST['availability_from']
         rent_to = request.POST['availability_to']
         city = request.POST['district']
@@ -140,32 +162,8 @@ def user_form(request):
             event.city = capitalized_string
             event.availability_to = rent_to
             event.availability_from = rent_from
+            event.category=cat
             form.save()
-
-
-            # price = form.cleaned_data['price']
-            # title = form.cleaned_data['title']
-            # region = form.cleaned_data['region']
-            # city = form.cleaned_data['city']
-            # description = form.cleaned_data['description']
-            # size = form.cleaned_data['size']
-            # contact = form.cleaned_data['contact']
-            # dp = form.cleaned_data['dp']
-            # pic1 = form.cleaned_data['pic1']
-            # pic2 = form.cleaned_data['pic2']
-            # pic3 = form.cleaned_data['pic3']
-            # pic4 = form.cleaned_data['pic4']
-            # pic5 = form.cleaned_data['pic5']
-            # pic6 = form.cleaned_data['pic6']
-            # rooms = form.cleaned_data['rooms']
-            # bathrooms = form.cleaned_data['bathrooms']
-            # utilities = form.cleaned_data['utilities']
-            # category = form.cleaned_data['category']
-            # Member.objects.create(date = datetime.now(), username=username, price=price, title=title, region=region, city=city,description=description,size=size,contact=contact,dp=dp,pic1=pic1,pic2=pic2,pic3=pic3,pic4=pic4,pic5=pic5,pic6=pic6,rooms=rooms,bathrooms=bathrooms, utilities=utilities, category=category,slug=str(datetime.now()))
-            return redirect('user')
-            # lol
-            # Do something with the valid form data
-            pass
     else:
         form = memberf()
     

@@ -3,9 +3,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>{% block title %}Tofiee{% endblock %}</title>
+<link rel="icon" type="image/png" href="{% static 'tofie.jpg' %}">
+
 <!-- <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'astyle.css' %}" />
 <link rel="stylesheet" type="text/css" href="{% static 'admin.css' %}" />
 <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
 <style>
@@ -57,11 +59,7 @@ z-index: 9999;
       <div class="menu">
         <ul>
           <li><a href="/">Home</a></li>
-          <li><a href="/sell/">Sell </a></li>
-          <li><a href="/buy/">Buy </a></li>
-          <li><a href="/rent/">Rent</a></li>
-          <li><a href="#">FAQ</a></li>
-          <li><a href="contact.html">Contact</a></li>
+
           {% if user.is_authenticated %}
             
           <li class="nav-item">
@@ -159,7 +157,7 @@ z-index: 9999;
           <div class="column3">
             <div class="main_text_box">
               <h1>Description</h1>
-              <p>{{ object.description }}&quot;</p>
+              <p>{{ object.description }}</p>
               
                         <br />
             </div>
@@ -172,7 +170,13 @@ z-index: 9999;
                 <li><span>Bathrooms:</span> {{ object.bathrooms }}</li>
                 <li><span>Other utilities:</span> {{ object.bathrooms }}</li>
               </ul>
+              <br>
+              {% if user.username == 'kofiadukpo' %}
+              <a href="{% url 'approve_record' object.id %}"><button>Approve</button></a>
+              {% else %}
+              {% endif %}
             </div>
+
 
             <!-- end of column three -->
           </div>

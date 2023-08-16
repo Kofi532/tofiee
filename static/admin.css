@@ -17,8 +17,14 @@ clear:both;
 padding:10px 0 10px 0;
 margin:auto;
 }
+/* .table_grid{
+    width:100%;
+    clear:both;
+    padding:10px 0 10px 0;
+    margin:auto;
+    } */
 table{width:100%;}
-th{background:#fff url(images/tr_back.gif) repeat-x center;color:#D8325D; height:21px; padding:10px;}
+th{ background:#fff url(images/tr_back.gif) repeat-x center;color:#D8325D; height:21px; padding:10px;}
 td{text-align:left;padding:5px;}
 tr.even td{background: #EAEAEA;}
 tr.odd td{background: #FDFDFD;}

@@ -34,11 +34,14 @@ margin: auto;
 text-decoration:none;
 }
 p{
-font-size:11px;
+font-size:15px;
 text-align:justify;
 padding:2px;
 margin:0px;
 }
+p.titl{
+	font-size:13px;
+	}
 p.proposal_text{
 width:170px;
 font-size:11px;
@@ -63,13 +66,13 @@ padding:4px;
 border:1px #CCCCCC solid;
 }
 #main_container{
-width:970px;
+width:auto;
 height:auto;
 margin:auto;
 padding:0px;
 }
 #header{
-width:970px;
+width:100%;
 height:110px;
 background-color:#05619b;
 margin:auto;
@@ -96,7 +99,7 @@ This stylesheet and the associated (x)html may be modified in any
 way to fit your requirements.
 =================================================================== */
 /* style the outer div to give it width */
-.menu {font-size:11px;padding:0px; float:right; width:700px;}
+.menu {font-size:11px;padding:0px; float:right; width:80%;}
 
 /* remove all the bullets, borders and padding from the default list styling */
 .menu ul {padding:0;margin:0;list-style-type:none; height:28px; background:#267cb2;}
@@ -111,17 +114,17 @@ way to fit your requirements.
 .menu ul ul li {display:block;width: auto;height:auto;position:relative;line-height:1em; border-bottom:1px #2384BF solid;}
 
 /* style the links for the top level */
-.menu a, .menu a:visited {display:block;float:left;height:100%;font-size:11px;text-decoration:none;color:#fff;background:#267cb2;padding:0 21px 0 17px;}
+.menu a, .menu a:visited {display:block;float:right;height:100%;font-size:15px;text-decoration:none;color:#fff;background:#267cb2;padding:0 21px 0 17px;}
 .menu a.current{background:#3da1e0;}
 /* style the sub level links */
 .menu ul ul a, .menu ul ul a:visited {display:block;background:#267cb2; color:#fff;width:12em;height:100%;line-height:1em; padding:0.5em 1em;}
-.menu ul table ul a, .menu ul table ul a:visited  {width:14em; w\idth:12em;}
+.menu ul table ul a, .menu ul table ul a:visited  {width:14em; width:12em;}
 
 
 /* style the table so that it takes no part in the layout - required for IE to work */
 .menu table {position:absolute; left:0; top:0; font-size:1em; z-index:-1;}
-.menu ul ul table {lef\t:-1px;}
-.menu ul ul table ul.left {margin-lef\t:2px;}
+.menu ul ul table {left:-1px;}
+.menu ul ul table ul.left {margin-left:2px;}
 
 .menu li:hover {position:relative;}
 * html .menu a:hover {position:relative;}
@@ -172,32 +175,32 @@ way to fit your requirements.
 
 /*------------------------------main content-----------------------*/
 #main_content{
-width:970px;
+width: 100%;
 margin:auto;
 clear:both;
 background-color:#FFFFFF;
 }
 /*------------------------middle_content-----------*/
 .column1{
-width:257px;
+width:20%;
 float:left;
 margin:0px;
 padding:10px 10px 10px 5px;
 }
 .column2{
-width:340px;
+width:50%;
 float:left;
 margin:0px;
 padding:10px 5px 10px 5px;
 }
 .column3{
-width:320px;
+width:20%;
 float:left;
 margin:0px;
 padding:10px 10px 10px 5px;
 }
 .column4{
-width:690px;
+width:70%;
 float:left;
 margin:0px;
 padding:10px 0px 10px 5px;
@@ -212,6 +215,7 @@ padding-bottom:10px;
 width:257px;
 height:10px;
 float:left;
+background-color: #0464a1;
 background:url(static/images/top_box_bg.gif) no-repeat center;
 }
 .center_left_box{
@@ -252,10 +256,11 @@ margin-top:15px;
 .title{
 background-color:#385870;
 text-align:left;
-width:670px;
+width:80%;
 padding:5px 5px 5px 20px;
 color:#FFFFFF;
 font-weight:bold;
+font-size: 15px;
 }
 .small_title{
 background-color:#385870;
@@ -264,6 +269,7 @@ width:100%;
 padding:5px 5px 5px 15px;
 color:#FFFFFF;
 font-weight:bold;
+font-size: larger;
 }
 .title2{
 background-color:#eef1f3;
@@ -289,6 +295,7 @@ padding:0px;
 padding:5px 5px 5px 25px;
 background:url(static/images/bullet.gif) no-repeat left;
 color:#333333;
+font-size: 15px;
 }
 .details_list ul li span{
 color:#0464a1;
@@ -354,12 +361,12 @@ color:#d8325d;
 text-decoration:none;
 }
 .big_pic{
-width:340px;
+width:100%;
 text-align:center;
 padding:5px 0 5px 0;
 }
 .pictures_thumbs{
-width:300px;
+width:100%;
 padding-left:40px;
 }
 /*------------------table style---------------*/
@@ -396,6 +403,7 @@ float:left;
 width:70px;
 padding-top:3px;
 text-align:right;
+font-size: 15px;
 }
 label.left_long{
 float:left;
@@ -412,7 +420,7 @@ float:left;
 margin-left:10px;
 }
 .contact_information{
-font-size:10px;
+font-size:15px;
 color:#385870;
 text-align:left;
 padding-left:20px;
@@ -517,7 +525,7 @@ margin-left:10px;
 
 /*-------------------footer------------------------*/
 #footer{
-width:970px;
+width:100%;
 height:41px;
 clear:both;
 font-size:11px;
