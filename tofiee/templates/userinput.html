@@ -1,38 +1,69 @@
-{% extends "baserent.html" %}
-{% block content %}
 {% load static %}
-{% load crispy_forms_tags %}         
+{% load crispy_forms_tags %}
 
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <style>
-    body {
-        font-size: 16px; /* Adjust the font size as needed */
-    }
-.form-group input,
-.form-group textarea {
-    width: 100%; /* Make the fields 100% wide */
-}
-label{
-    font-size: 15px;
-}
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
 
-button[type="submit"] {
-    width: 100%; /* Make the button 100% wide */
-    max-width: 300px; /* Set a maximum width if desired */
-    margin-top: 10px; /* Add some spacing */
-}
+        form {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
 
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
     </style>
+</head>
     
     <body>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+
+              <ul class="nav navbar-nav">
+                <li><a href="/">Home</a></li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/">Hi {{ user.username }}!</a>
+                  </li>
+              </ul>
+            </div>
+          </nav>
         <div class="column4">
             <div class="container">
                 <form method="post" enctype="multipart/form-data">
-                    <!-- <select name="dropdown" id="">
-                        <option value="{{ object.slug }}">{{ object.slug }}</option>
-                    </select>
-                    <label for="username">Username:</label>
-                    <input name="username" type="text"> -->
-        
                     {% csrf_token %}
                     <div class="">
                         <label >I am here to: </label>
@@ -112,7 +143,6 @@ button[type="submit"] {
                 </form>
             </div>
     
-        </div>
 
     </body>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -160,5 +190,4 @@ button[type="submit"] {
 
 
 
-{% endblock %}
 

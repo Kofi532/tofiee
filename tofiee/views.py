@@ -43,28 +43,9 @@ def first(request):
             drop = Member.objects.filter(region__icontains=output_string).filter(city__icontains=capitalized_string).filter(category__icontains=reason_).filter(price__gte=price_from_, price__lte=price_to_)
         else:
             r=3
-            drop = Member.objects.filter(region__icontains=output_string).filter(city__icontains=capitalized_string).filter(room=room_).filter(category__icontains=reason_).filter(price__gte=price_from_, price__lte=price_to_)
+            drop = Member.objects.filter(region__icontains=output_string).filter(city__icontains=capitalized_string).filter(rooms=room_).filter(category__icontains=reason_).filter(price__gte=price_from_, price__lte=price_to_)
+        
         return render (request=request, template_name="filter.html", context={"member":drop})
-        element = "carrot"
-        string_list = ["banana", "orange", "grape", "apricot", "carrot"]
-        cf = find_closest_string(element, string_list) 
-        df = pd.DataFrame(Member.objects.all().values())
-        citylist = list(df['city'])
-        citying = []
-        for i in citylist:
-            i
-            cityy = find_closest_string(element, citylist) 
-            citying.append(cityy)
-            citylist.remove(cityy)
-        # filtering = []
-        # for i in citying:
-        #     filt = '.filter(city='+i+')'
-        #     filtering.append(filt)
-        # separator = '' 
-        # combined_string = separator.join(filtering)
-        cityquery = pd.DataFrame(Member.objects.values().filter(city__in=citying).filter(price__gte=20, price__lte=80).filter(rooms=3))
-		
-        lol
     member = Member.objects.all().order_by('-date')[:2]
     members = Member.objects.all().order_by('-date')[:10]
     return render (request=request, template_name="index.html", context={"member":member, "members":members})

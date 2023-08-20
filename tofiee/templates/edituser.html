@@ -1,30 +1,68 @@
-<!-- edit_item.html -->
-{% extends "baserent.html" %}
-{% block content %}
 {% load static %}
+{% load crispy_forms_tags %}
 
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <style>
-.container {
-  width: 500px;
-  clear: both;
-}
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
 
-.container input {
-  width: 100%;
-  clear: both;
-}
-.form-group input,
-    .form-group select,
-    .form-group textarea {
-        font-size: 15px; /* Adjust the font size as needed */
-        margin-top: 10px;
-    }
+        form {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
     </style>
 
 <body>
-    <div class="column4">
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+
+          <ul class="nav navbar-nav">
+            <li><a href="/">Home</a></li>
+            <li class="nav-item">
+                <a class="nav-link" href="/user/">Hi {{ user.username }}!</a>
+              </li>
+          </ul>
+        </div>
+      </nav>
+    <div >
         <h1>Edit Item</h1>
-        <div class="container">
+        <div >
             <form action="/updaterecord/{{ object.id }}" enctype="multipart/form-data" method="post">
                 {% csrf_token %}
                 <label for="price">Price:</label>
@@ -177,4 +215,4 @@
         });
     });
 </script>
-{% endblock %}
+</html>
