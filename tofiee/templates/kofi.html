@@ -1,98 +1,147 @@
-
-{% extends "baseuser.html" %}
+{% extends "base.html" %}
 {% block content %}
 {% load static %}
-{% load crispy_forms_tags %}         
+
+<div class="column4">
+
+  <div class="title" style="float:left;">
+    <div style="float:left;">Renting homes and facilities</div>
+    <!-- <div style="float:right; font-size:10px;color:#d8325d;padding-top:2px;">display: <a href="list2.html"><img src="images/list_style3.gif" border="0" /></a> <a href="list1.html"><img src="images/list_style1.gif" border="0" /></a> <a href="list.html"><img src="images/list_style2_a.gif" border="0" /></a> </div> -->
+  </div>
+
+</div>
+<div class="column2">
+
+  <form style="display: grid; grid-template-columns: auto 5fr; gap: 10px; font-size: 15px;" action="" method="post">
+    <div >
+      <label>Region: </label>
+      <select id="regional" name="regional" required>
+        <option value="none">None</option>
+        <option value="ashanti">Ashanti Region</option>
+        <option value="bono">Bono Region</option>
+        <option value="bono_east">Bono East Region</option>
+        <option value="ahafo">Ahafo Region</option>
+        <option value="central">Central Region</option>
+        <option value="eastern">Eastern Region</option>
+        <option value="greater_accra">Greater Accra Region</option>
+        <option value="northern">Northern Region</option>
+        <option value="north_east">North East Region</option>
+        <option value="oti">Oti Region</option>
+        <option value="savannah">Savannah Region</option>
+        <option value="upper_east">Upper East Region</option>
+        <option value="upper_west">Upper West Region</option>
+        <option value="volta">Volta Region</option>
+        <option value="western">Western Region</option>
+        <option value="western_north">Western North Region</option>
+    </select>
+        <!-- <input type="text" name="region" class="form_input"/> -->
+    </div>
+    <div >
+      <label >District/ City: </label>
+      <select id="district" name="district" required>
+        <!-- Options will be dynamically generated here -->
+    </select>                
+  </div>
+    <div>
+      <label >Price from: </label>
+      <input type="number" name="price_from" class="form_input" value="minimum" required/>
+    </div>
+    <div >
+      <label >Price to: </label>
+      <input type="number" name="price_to" class="form_input" value="maximum" required/>
+    </div>
+    <div >
+      <label >Rooms: </label>
+      <input type="number" name="rooms" class="form_input" />
+    </div>
+<div>
+  <label   for="item_p">Select item</label>
+  <select  name="item_p" id="">
+    <option value="land">Land</option>
+    <option value="Office space">Office Spaces</option>
+    <option value="room">Rooms/ Houses/ Apartment</option>
+    <option value="event">Event Center</option>
+    <option value="conference">Conference Rooms</option>
+  </select>
+</div>
+<div>
+
+
+<label >Maximum period</label>
+<select  name="item_p" id="">
+  <option value="land">Land</option>
+
+</select>
+</div>
+</form>
+
+<div class="column4">
+
+
+    {% for i in member %}
+
+    <div class="offer_box_wide"> <a href="#"><img src="{{ i.dp.url }}" width="130" height="98" class="img_left" alt="" border="0"/></a>
+      <div class="offer_info"> <span>For Sale GHC {{ i.price }}</span>
+        <p class="titl"> {{ i.city }}, {{ i.region }}</p>
+        <p class="titl"> {{ i.description|truncatewords:7  }}</p>
+        <div class="more"><a href="{% url 'post_detail' i.slug  %}">...more</a></div>
+      </div>
+    </div>
+    {% endfor %}
+
+    </div>
+
+    {% endblock %}
+
+    <!DOCTYPE html>
 <html>
-    <body>
-        <form method="post" enctype="multipart/form-data">
-            <!-- <select name="dropdown" id="">
-                <option value="{{ object.slug }}">{{ object.slug }}</option>
-            </select>
-            <label for="username">Username:</label>
-            <input name="username" type="text"> -->
+<head>
+<script>
+    // Define districts for each region
+    var districtsByRegion = {
+        "Greater Accra": ["Accra", "Tema", "Ga West"],
+        "Ashanti": ["Kumasi", "Obuasi", "Suame"],
+        // Add more regions and districts
+    };
 
-            {% csrf_token %}
-            <div class="form">
-                {% csrf_token %}
-                <div class="form_row">
-                  <label class="left">Region: </label>
-                  <select id="region" name="region">
-                    <option value="none">None</option>
-                    <option value="ashanti">Ashanti Region</option>
-                    <option value="bono">Bono Region</option>
-                    <option value="bonoeast">Bono East Region</option>
-                    <option value="ahafo">Ahafo Region</option>
-                    <option value="central">Central Region</option>
-                    <option value="eastern">Eastern Region</option>
-                    <option value="greateraccra">Greater Accra Region</option>
-                    <option value="northern">Northern Region</option>
-                    <option value="northeast">North East Region</option>
-                    <option value="oti">Oti Region</option>
-                    <option value="savannah">Savannah Region</option>
-                    <option value="uppereast">Upper East Region</option>
-                    <option value="upperwest">Upper West Region</option>
-                    <option value="volta">Volta Region</option>
-                    <option value="western">Western Region</option>
-                    <option value="westernnorth">Western North Region</option>
-                </select>
-                  <!-- <input type="text" name="region" class="form_input"/> -->
-                </div>
-                <div class="form_row">
-                  <label class="left">District/ City: </label>
-                  <select id="district" name="district" required>
-                    <!-- Options will be dynamically generated here -->
-                </select>                
-              </div>
+    function updateDistricts() {
+        var regionDropdown = document.getElementById("region");
+        var districtDropdown = document.getElementById("district");
+        
+        var selectedRegion = regionDropdown.value;
+        var districts = districtsByRegion[selectedRegion];
+        
+        // Clear existing options
+        districtDropdown.innerHTML = "";
+        
+        // Populate district options
+        if (districts) {
+            for (var i = 0; i < districts.length; i++) {
+                var option = document.createElement("option");
+                option.text = districts[i];
+                option.value = districts[i];
+                districtDropdown.add(option);
+            }
+        }
+    }
+</script>
+</head>
+<body>
 
-              </div>
-            {{ form | crispy }}
-            <button type="submit">Submit</button>
-        </form>
-    </body>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            const districts = {
-                greateraccra: ['Tema Metropolitan', 'Ablekuma Central Municipal', 'Ablekuma North Municipal', 'Ablekuma West Municipal', 'Adenta Municipal', 'Ashaiman Municipal', 'Ayawaso Central Municipal', 'Ayawaso East Municipal', 'Ayawaso North Municipal', 'Ayawaso West Municipal', 'Ga South Municipal', 'Ga Central Municipal', 'Ga East Municipal', 'Ga North Municipal', 'Ga West Municipal', 'Korle Klottey Municipal', 'Kpone Katamanso Municipal', 'Krowor Municipal', 'La Dade-Kotopon Municipal', 'La-Nkwantanang Municipal', 'Ledzokuku Municipal', 'Okaikwei North Municipal', 'Tema West Municipal', 'Weija-Gbawe Municipal', 'Ada East District', 'Ada West District', 'Ningo-Prampram District', 'Shai-Osudoku District'],
-                ashanti: ['Kumasi Metropolitan', ' Ahafo Ano North Municipal', ' Asante Akim Central Municipal', ' Asante Akim South Municipal', ' Asokore Mampong Municipal', ' Asokwa Municipal', ' Atwima Nwabiagya Municipal', ' Bekwai Municipal', ' Ejisu Municipal', ' Ejura Sekyredumasi Municipal', ' Juaben Municipal', ' Kwabre East Municipal', ' Kwadaso Municipal', ' Mampong Municipal', ' Obuasi Municipal', ' Offinso Municipal', ' Oforikrom Municipal', ' Old Tafo Municipal', ' Suame Municipal', ' Adansi Asokwa District', ' Adansi North District', ' Adansi South District', ' Afigya Kwabre North District', ' Afigya Kwabre South District', ' Ahafo Ano South East District', ' Ahafo Ano South West District', 'Akrofuom District', 'Amansie Central District', 'Amansie South District', 'Amansie West District', 'Asante Akim North District', 'Atwima Kwanwoma District', 'Atwima Mponua District', 'Atwima', 'Nwabiagya North District', 'Bosome Freho District', 'Bosomtwe District', 'Obuasi East District', 'Offinso North District', 'Sekyere Afram Plains District', 'Sekyere Central District', 'Sekyere East District', 'Sekyere Kumawu District', 'Sekyere South District'],
-                ahafo: ['Goaso', 'Asutifi North District', 'Tano South Municipal', 'Asutifi South District', 'Asunafo South District', 'Tano North Municipal', ' Asunafo North Municipal'],
-                bonoeast: ['Atebubu Amantin Municipal', 'Atebubu', 'Kintampo North Municipal', 'Nkoranza South Municipal', 'Techiman Municipal', 'Sene West District', 'Pru East District', 'Kintampo South District', 'Nkoranza North District', 'Techiman', 'North District', 'Sene East District', 'Pru West District'],
-                bono: ['Berekum East Municipal', 'Dormaa Central Municipal', 'Jaman South Municipal', 'Sunyani Municipal', 'Wenchi Municipal', 'Tain District', 'Jaman North District', 'Sunyani West District', 'Dormaa East District', 'Banda District', 'Dormaa West District', 'Berekum West District'],
-                central: ['Cape Coast Metropolitan', 'Agona West Municipal', 'Assin Fosu Municipal', 'Awutu Senya East Municipal', 'Effutu Municipal', 'Komenda-Edina-Eguafo-Abrim Municipal', 'Mfantsiman Municipal', 'Upper Denkyira East Municipal', 'Abura/ Asebu/ Kwamankese District', 'Agona East District', 'Ajumako/Enyan/Esiam District', 'Asikuma-Odoben-Brakwa-Breman District', 'Assin North District', 'Assin South District', 'Awutu Senya District', 'Ekumfi District', 'Gomoa Central District', 'Gomoa East District', 'Gomoa West District', 'Hemang Lower Denkyira District', 'Twifu Ati Morkwa District', 'Upper Denkyira West District'],
-                eastern: ['Abuakwa South Municipal', 'Akwapim North Municipal', 'Birim Central Municipal', 'Kwaebibirem Municipal', 'Kwahu West Municipal', 'Lower Manya Krobo Municipal', 'New Juaben North Municipal', 'New Juaben South Municipal', 'Nsawam Adoagyiri Municipal', 'Suhum Municipal', 'West Akim Municipal', 'Yilo Krobo Municipal', 'Achiase District', 'Akuapem South District', 'Akyemansa District', 'Asene-Manso-Akroso District', 'Asuogyaman District', 'Atiwa East District', 'Atiwa West District', 'Ayensuano District', 'Birim North District', 'Birim South District', 'Denkyembuor District', 'Fanteakwa North District', 'Fanteakwa South District', 'Kwahu Afram Plains North District', 'Kwahu Afram Plains South District', 'Kwahu East District', 'Kwahu South District', 'Okere District', 'Upper Manya Krobo District', 'Upper West Akim District'],
-                northern: ['Tamale Metropolitan', 'Gushegu Municipal', 'Nanumba North Municipal', 'Sagnerigu Municipal', 'Savelugu Municipal', 'Yendi Municipal', 'Karaga District', 'Kpandai District', 'Kumbungu District', 'Mion District', 'Nanton District', 'Nanumba South District', 'Saboba District', 'Tatale Sanguli District', 'Tolon District', 'Zabzugu District'],            
-                northeast: ['East Mamprusi Municipal', 'West Mamprusi Municipal', 'Bunkpurugu Nakpanduri District', 'Chereponi District', 'Mamprugu Moagduri District', 'Yunyoo Nasuan District'],
-                oti: ['KRACHI EAST MUNICIPAL', 'NKWANTA SOUTH MUNICIPAL', 'BIAKOYE DISTRICT', 'JASIKAN DISTRICT', 'KADJEBI DISTRICT', 'KRACHI NCHUMURU DISTRICT', 'KRACHI WEST DISTRICT', 'NKWANTA NORTH DISTRICT', 'GUAN DISTRICT'],
-                savannah: ['Bole District', 'East Gonja Municipal', 'West Gonja District', 'Sawla Tuna Kalba District', 'Central  Gonja District', 'North Gonja District', 'North East Gonja District'],
-                uppereast: ['BAWKU MUNICIPAL', 'BOLGATANGA MUNICIPAL', 'KASSENA NANKANA EAST MUNICIPAL', 'BAWKU WEST DISTRICT', 'BINDURI DISTRICT', 'BOLGATANGA EAST DISTRICT', 'BONGO DISTRICT', 'BUILSA NORTH DISTRICT', 'BUILSA SOUTH DISTRICT', 'GARU DISTRICT', 'KASSENA NANKANA WEST DISTRICT', 'NABDAM DISTRICT', 'PUSIGA DISTRICT', 'TALENSI DISTRICT', 'TEMPANE DISTRICT'],
-                upperwest: ['WA MUNICIPAL', 'JIRAPA MUNICIPAL', 'LAWRA MUNICIPAL', 'SISSALA EAST MUNICIPAL', 'DAFIAMA BUSSIE ISSA DISTRICT', 'LAMBUSSIE DISTRICT', 'NANDOM DISTRICT', 'NADOWLI/KALEO DISTRICT', 'SISSALA WEST DISTRICT', 'WA EAST DISTRICT', 'WA WEST DISTRICT'],
-                volta: ['ADAKLU DISTRICT', 'AFADZATO SOUTH DISTRICT', 'AGOTIME-ZIOPE DISTRICT', 'AKATSI NORTH DISTRICT', 'AKATSI SOUTH DISTRICT', 'ANLOGA DISTRICT', 'CENTRAL TONGU DISTRICT', 'HO MUNICIPAL', 'HO WEST DISTRICT', 'HOHOE MUNICIPAL', 'KETA MUNICIPAL', 'KETU NORTH MUNICIPAL', 'KETU SOUTH MUNICIPAL', 'KPANDO MUNICIPAL', 'NORTH DAYI DISTRICT', 'NORTH TONGU DISTRICT', 'SOUTH DAYI DISTRICT', 'SOUTH TONGU DISTRICT'],
-                westernnorth: ['AOWIN MUNICIPAL', 'BIBIANI ANHWIASO BEKWAI MUNICIPAL', 'SEFWI WIAWSO MUNICIPAL', 'BIA EAST DISTRICT', 'BIA WEST DISTRICT', 'BODI DISTRICT', 'JUABOSO DISTRICT', 'SEFWI AKONTOMBRA DISTRICT', 'SUAMAN DISTRICT'],
-                western: ['AHANTA WEST MUNICIPAL', 'AMENFI CENTRAL DISTRICT', 'WASSA AMENFI EAST MUNICIPAL', 'AMENFI WEST MUNICIPAL', 'EFFIA KWESIMINTSIM MUNICIPAL', 'ELLEMBELLE DISTRICT', 'JOMORO MUNICIPAL', 'MPOHOR DISTRICT', 'NZEMA EAST MUNICIPAL', 'PRESTEA HUNI-VALLEY MUNICIPAL', 'SEKONDI-TAKORADI METROPOLITAN', 'SHAMA DISTRICT', 'TARKWA NUSAEM MUNICIPAL', 'WASSA EAST DISTRICT'],
-                // Add more districts for other regions
-            };
+<form>
+    <label for="region">Select a Region:</label>
+    <select id="region" name="region" onchange="updateDistricts()">
+        <option value="">Select</option>
+        <option value="Greater Accra">Greater Accra</option>
+        <option value="Ashanti">Ashanti</option>
+        <!-- Add more regions -->
+    </select>
     
-            const regionSelect = document.getElementById('region');
-            const districtSelect = document.getElementById('district');
-    
-            regionSelect.addEventListener('change', function () {
-                const selectedRegion = regionSelect.value;
-                const selectedDistricts = districts[selectedRegion];
-    
-                districtSelect.innerHTML = ''; // Clear previous options
-    
-                for (const district of selectedDistricts) {
-                    const option = document.createElement('option');
-                    option.value = district.toLowerCase();
-                    option.textContent = district;
-                    districtSelect.appendChild(option);
-                }
-            });
-        });
-    </script>
+    <label for="district">Select a District:</label>
+    <select id="district" name="district">
+        <!-- District options will be dynamically added here -->
+    </select>
+</form>
+
+</body>
 </html>
-
-
-
-{% endblock %}

@@ -7,7 +7,7 @@ class memberf(forms.ModelForm):
 	class Meta:
 		model = Member
 		fields = ["username","price","title","region","city","town","description","size","contact", "dp","pic1","pic2","pic3","pic4","pic5","pic6","rooms","bathrooms","utilities","category","availability_from", "availability_to"] #username,active,slug
-		widgets = {'username': forms.HiddenInput(),'region':forms.HiddenInput(),'city':forms.HiddenInput(),'category':forms.HiddenInput(), 'availability_from':forms.HiddenInput(), 'availability_to':forms.HiddenInput()}
+		widgets = {'period': forms.HiddenInput(),'period_number': forms.HiddenInput(),'username': forms.HiddenInput(),'region':forms.HiddenInput(),'city':forms.HiddenInput(),'category':forms.HiddenInput(), 'availability_from':forms.HiddenInput(), 'availability_to':forms.HiddenInput()}
     
 
 class NewUserForm(UserCreationForm):

@@ -1,0 +1,137 @@
+{% load static %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>{% block title %}Tofiee{% endblock %}
+</title>
+<link rel="icon" type="image/png" href="{% static 'tofie.jpg' %}">
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<link rel="stylesheet" type="text/css" href="{% static 'astyle.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'admin.css' %}" />
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+
+<style>
+.popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+}
+</style>
+</head>
+<body>
+  <div id="main_container">
+
+  <div id="header">
+    <div id="logo"> <a href="/"><img src="{% static 'tofie.jpg' %}" width="147" height="78" alt="" border="0" /></a> </div>
+    <div class="banner_adds"></div>
+    <nav>
+      <div class="menu">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/sell/">Funding</a></li>
+          <li><a href="/buy/">Buy </a></li>
+          <li><a href="/rent/">Rent</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Contact</a></li>
+          {% if user.username == 'kofiadukpo' %}
+          <li><a href="/boss/">Boss</a></li>
+          {% else %}
+          {% endif %}
+
+          {% if user.is_authenticated %}
+            
+          <li class="nav-item">
+            <a class="nav-link" href="/user/">Hi {{ user.username }}!</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+              <a class="nav-link" href="{% url 'register' %}">Register</a>
+            </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/accounts/login/">Login</a>
+          </li>
+        {% endif %}
+        </ul>
+      </div>
+    </nav>
+
+  </div>
+  <div id="main_content">
+    <div class="column1">
+      <div class="left_box">
+        <div class="top_left_box"> </div>
+
+        <div class="bottom_left_box"> </div>
+      </div>
+      <div class="left_box">
+        <div class="top_left_box"> </div>
+        <div class="center_left_box">
+          <div class="box_title"><span>Join</span> our newsletter:</div>
+          <div class="form">
+            <div class="form_row">
+              <a id="showPopupBtn" class="left" href="#">Yes i want to.</a>
+              <div id="popup" class="popup">
+                <p>Thank you for subscribing.</p>
+                <button id="closePopupBtn">Close</button>
+            </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="bottom_left_box"> </div>
+      </div>
+      <div class="left_box">
+        <div class="top_left_box"> </div>
+        <div class="center_left_box">
+          <div class="box_title"><span>Contact</span> information:</div>
+          <div class="form">
+            <div class="form_row"> <img src="{% static 'images/contact_envelope.gif' %}" width="50" height="47" border="0" class="img_right" alt="" />
+              <div class="contact_information"> Email: info@tofieegh.com<br />
+                Telephone: xxxxxxxx<br />
+                Mobile: xxxxxxx<br />
+                <br />
+                <span>www.tofieegh.com</span> </div>
+            </div>
+          </div>
+        </div>
+        <div class="bottom_left_box"> </div>
+      </div>
+    </div>
+    <!-- end of column one -->
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+    <!-- end of main_content -->
+    <div id="footer">
+        <div id="copyright">
+          <div style="float:left; padding:3px;"><a href="#"><img src="{% static 'tofie.jpg' %}" width="42" height="35" alt="" border="0" /></a></div>
+          <div style="float:left; padding:14px 10px 10px 10px;"> Tofiee.&copy; All Rights Reserved 2008 - By <a href="http://tofieegh.com" style="color:#772c17;">Tofiee</a></div>
+        </div>
+        <ul class="footer_menu">
+          <li><a href="/" class="nav_footer"> Home </a></li>
+          <li><a href="/rent/" class="nav_footer"> Renting  </a></li>
+          <li><a href="/buy/" class="nav_footer"> Buying  </a></li>
+          <li><a href="/sell/" class="nav_footer"> Funding</a></li>
+        </ul>
+      </div>
+  </div>
+</div>
+<!-- end of main_container -->
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+</html>

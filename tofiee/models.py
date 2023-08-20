@@ -36,8 +36,10 @@ class Member(models.Model):
   document_c = models.FloatField(max_length=100, default=0)
   availability_from = models.DateField(max_length=100, default=datetime.now(),  blank=True)
   availability_to = models.DateField(max_length=100, default=datetime.now(), blank=True)
-
-
+  period = models.CharField(max_length=100, default='none', blank=True)
+  period_number = models.FloatField(max_length=100, default=0, blank=True)
+  facility = models.CharField(max_length=100, default='none', blank=True)
+  
   def __str__(self):
     return self.username
 

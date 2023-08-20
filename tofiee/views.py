@@ -69,6 +69,7 @@ def first(request):
     members = Member.objects.all().order_by('-date')[:10]
     return render (request=request, template_name="index.html", context={"member":member, "members":members})
 
+
 class Memberview(CreateView): 
     model = Member
     form_class = memberf
@@ -92,6 +93,27 @@ def buy(request):
     return render (request=request, template_name="buy.html", context={"member":member})
 
 def rent(request):
+    if request.method == "POST":
+        region_ = request.POST.get('region')
+        city_ = request.POST.get('district')
+        price_from_ = request.POST.get('price_from') 
+        price_to_ = request.POST.get('price_to') 
+        room_ = request.POST.get('rooms') 
+        item = request.POST.get('item_p')
+        maxtime =  request.POST.get('maxtime')
+        words = region_.split('_')
+        capitalized_words = [word.capitalize() if i == 0 else word for i, word in enumerate(words)]
+        output_string = ' '.join(capitalized_words)
+        words = city_.split()
+        capitalized_city = [word.capitalize() for word in words]
+        capitalized_string = ' '.join(capitalized_city)
+        if room_ == None:
+                r=2
+                drop = Member.objects.filter(region__icontains=output_string).filter(city__icontains=capitalized_string).filter(category__icontains='rent').filter(price__gte=price_from_, price__lte=price_to_)
+        else:
+                r=3
+                drop = Member.objects.filter(region__icontains=output_string).filter(city__icontains=capitalized_string).filter(rooms=room_).filter(category__icontains='rent').filter(price__gte=price_from_, price__lte=price_to_)
+        return render (request=request, template_name="rent.html", context={"member":drop})
     member = Member.objects.all().order_by('-date')
     return render (request=request, template_name="rent.html", context={"member":member})
 
@@ -147,6 +169,9 @@ def user_form(request):
         rent_to = request.POST['availability_to']
         city = request.POST['district']
         region = request.POST['regional']
+        facility = request.POST['item_p']
+        period = request.POST['period']
+        maxtime = request.POST['maxtime']
         form = memberf(request.POST, request.FILES)
         if form.is_valid():
             event = form.save(commit=False)
@@ -163,7 +188,11 @@ def user_form(request):
             event.availability_to = rent_to
             event.availability_from = rent_from
             event.category=cat
+            event.period = period
+            event.period_number = maxtime
+            event.facility = facility
             form.save()
+            return HttpResponseRedirect(reverse('user'))
     else:
         form = memberf()
     
@@ -199,6 +228,9 @@ def updaterecord(request, id):
   town = request.POST['town']
   availability_from = request.POST['availability_from']
   availability_to = request.POST['availability_to']
+  facility = request.POST['item_p']
+  period = request.POST['period']
+  maxtime = request.POST['maxtime']
   member = Member.objects.get(id=id)
   member.price = price
   member.title = title
@@ -220,6 +252,9 @@ def updaterecord(request, id):
   member.utilities=utilities
   member.availability_from= availability_from
   member.availability_to=availability_to
+  member.period=period
+  member.period_number=maxtime
+  member.facility=facility
 
   member.save()
   return HttpResponseRedirect(reverse('user'))

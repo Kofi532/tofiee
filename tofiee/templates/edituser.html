@@ -1,9 +1,8 @@
 <!-- edit_item.html -->
-{% extends "baseuser.html" %}
+{% extends "baserent.html" %}
 {% block content %}
 {% load static %}
-<!DOCTYPE html>
-<html>
+
     <style>
 .container {
   width: 500px;
@@ -14,97 +13,128 @@
   width: 100%;
   clear: both;
 }
-
+.form-group input,
+    .form-group select,
+    .form-group textarea {
+        font-size: 15px; /* Adjust the font size as needed */
+        margin-top: 10px;
+    }
     </style>
 
 <body>
-    <h1>Edit Item</h1>
-    <div class="container">
-        <form action="/updaterecord/{{ object.id }}" enctype="multipart/form-data" method="post">
-            {% csrf_token %}
-            <label for="price">Price:</label>
-            <input type="number" name="price" value="{{ object.price }}">
-           <br>
-            <label for="title">Title:</label>
-            <!-- <textarea name="title">{{ object.title }}</textarea> -->
-            <input name="title" type="text" value="{{ object.title }}">
-            <!-- <label for="region">Region:</label>
-            <input type="text" name="region" value="{{ object.region }}"><br> -->
-            <div class="">
-                <label class="">Region: </label>
-                <select id="regional" name="regional" required>
-                  <option value="none">None</option>
-                  <option value="ashanti">Ashanti Region</option>
-                  <option value="bono">Bono Region</option>
-                  <option value="bono_east">Bono East Region</option>
-                  <option value="ahafo">Ahafo Region</option>
-                  <option value="central">Central Region</option>
-                  <option value="eastern">Eastern Region</option>
-                  <option value="greater_accra">Greater Accra Region</option>
-                  <option value="northern">Northern Region</option>
-                  <option value="north_east">North East Region</option>
-                  <option value="oti">Oti Region</option>
-                  <option value="savannah">Savannah Region</option>
-                  <option value="upper_east">Upper East Region</option>
-                  <option value="upper_west">Upper West Region</option>
-                  <option value="volta">Volta Region</option>
-                  <option value="western">Western Region</option>
-                  <option value="western_north">Western North Region</option>
-              </select>
-              </div>
-              <div class="">
-                <label class="">District/ City: </label>
-                <select id="district" name="district" required>
-                  <!-- Options will be dynamically generated here -->
-              </select>                
-            </div>
-            <div class="">
-                <label class="">I am here to: </label>
-                <select id="category" name="category" >
-                    <option value="sell">Sell</option>
-                    <option value="rent">Rent</option>
-                  <!-- Options will be dynamically generated here -->
-              </select>                
-            </div>
-            <!-- <label for="city">District:</label>
-            <input type="text" name="city" value="{{ object.city }}"><br> -->
-            <label for="town">Town:</label>
-            <input type="text" name="town" value="{{ object.town }}"><br>
-            <label for="description">Description:</label>
-            <input type="text" name="description" value="{{ object.description }}"><br>
-            <label for="size">Size:</label>
-            <input type="text" name="size" value="{{ object.size }}"><br>
-            <label for="contact">Contact:</label>
-            <input type="text" name="contact" value="{{ object.contact }}"><br>
-            <label for="dp">DP:</label>
-            <input accept="image/" type="file" name="dp" value="{{ object.dp }}"><br>
-            <label for="pic1">Picture 1:</label>
-            <input accept="image/" type="file" name="pic1" value="{{ object.pic1 }}"><br>
-            <label for="pic2">Picture 2:</label>
-            <input accept="image/" type="file" name="pic2" value="{{ object.pic2 }}"><br>
-            <label for="pic3">Picture 3:</label>
-            <input accept="image/" type="file" name="pic3" value="{{ object.pic3 }}"><br>
-            <label for="pic4">Picture 4:</label>
-            <input accept="image/" type="file" name="pic4" value="{{ object.pic4 }}"><br>
-            <label for="pic5">Picture 5:</label>
-            <input accept="image/" type="file" name="pic5" value="{{ object.pic5 }}"><br>
-            <label for="pic6">Picture 6:</label>
-            <input accept="image/" type="file" name="pic6" value="{{ object.pic6 }}"><br>
-            <label for="rooms">Rooms:</label>
-            <input type="number" name="rooms" value="{{ object.rooms }}"><br>
-            <label for="bathrooms">Bathrooms:</label>
-            <input type="number" name="bathrooms" value="{{ object.bathrooms }}"><br>
-            <label for="utilities">Utilities:</label>
-            <input type="text" name="utilities" value="{{ object.utilities }}"><br>
-            <label for="availability_from">Available from:</label>
-            <input type="date" name="availability_from" value="{{ object.availability_from }}"><br>
-            <label for="availability_to">Available to:</label>
-            <input type="date" name="availability_to" value="{{ object.availability_to }}"><br>
-
-            <button type="submit">Save</button>
-        </form>
+    <div class="column4">
+        <h1>Edit Item</h1>
+        <div class="container">
+            <form action="/updaterecord/{{ object.id }}" enctype="multipart/form-data" method="post">
+                {% csrf_token %}
+                <label for="price">Price:</label>
+                <input type="number" name="price" value="{{ object.price }}">
+               <br>
+                <label for="title">Title:</label>
+                <!-- <textarea name="title">{{ object.title }}</textarea> -->
+                <input name="title" type="text" value="{{ object.title }}">
+                <!-- <label for="region">Region:</label>
+                <input type="text" name="region" value="{{ object.region }}"><br> -->
+                <div class="">
+                    <label class="">Region: </label>
+                    <select id="regional" name="regional" required>
+                      <option value="none">None</option>
+                      <option value="ashanti">Ashanti Region</option>
+                      <option value="bono">Bono Region</option>
+                      <option value="bono_east">Bono East Region</option>
+                      <option value="ahafo">Ahafo Region</option>
+                      <option value="central">Central Region</option>
+                      <option value="eastern">Eastern Region</option>
+                      <option value="greater_accra">Greater Accra Region</option>
+                      <option value="northern">Northern Region</option>
+                      <option value="north_east">North East Region</option>
+                      <option value="oti">Oti Region</option>
+                      <option value="savannah">Savannah Region</option>
+                      <option value="upper_east">Upper East Region</option>
+                      <option value="upper_west">Upper West Region</option>
+                      <option value="volta">Volta Region</option>
+                      <option value="western">Western Region</option>
+                      <option value="western_north">Western North Region</option>
+                  </select>
+                  </div>
+                  <div class="">
+                    <label class="">District/ City: </label>
+                    <select id="district" name="district" required>
+                      <!-- Options will be dynamically generated here -->
+                  </select>                
+                </div>
+                <div class="">
+                    <label class="">I am here to: </label>
+                    <select id="category" name="category" >
+                        <option value="sell">Sell</option>
+                        <option value="rent">Rent</option>
+                      <!-- Options will be dynamically generated here -->
+                  </select>                
+                </div>
+                <!-- <label for="city">District:</label>
+                <input type="text" name="city" value="{{ object.city }}"><br> -->
+                <label for="town">Town:</label>
+                <input type="text" name="town" value="{{ object.town }}"><br>
+                <label for="description">Description:</label>
+                <input type="text" name="description" value="{{ object.description }}"><br>
+                <label for="size">Size:</label>
+                <input type="text" name="size" value="{{ object.size }}"><br>
+                <label for="contact">Contact:</label>
+                <input type="text" name="contact" value="{{ object.contact }}"><br>
+                <label for="dp">DP:</label>
+                <input accept="image/" type="file" name="dp" value="{{ object.dp }}"><br>
+                <label for="pic1">Picture 1:</label>
+                <input accept="image/" type="file" name="pic1" value="{{ object.pic1 }}"><br>
+                <label for="pic2">Picture 2:</label>
+                <input accept="image/" type="file" name="pic2" value="{{ object.pic2 }}"><br>
+                <label for="pic3">Picture 3:</label>
+                <input accept="image/" type="file" name="pic3" value="{{ object.pic3 }}"><br>
+                <label for="pic4">Picture 4:</label>
+                <input accept="image/" type="file" name="pic4" value="{{ object.pic4 }}"><br>
+                <label for="pic5">Picture 5:</label>
+                <input accept="image/" type="file" name="pic5" value="{{ object.pic5 }}"><br>
+                <label for="pic6">Picture 6:</label>
+                <input accept="image/" type="file" name="pic6" value="{{ object.pic6 }}"><br>
+                <label for="rooms">Rooms:</label>
+                <input type="number" name="rooms" value="{{ object.rooms }}"><br>
+                <label for="bathrooms">Bathrooms:</label>
+                <input type="number" name="bathrooms" value="{{ object.bathrooms }}"><br>
+                <label for="utilities">Utilities:</label>
+                <input type="text" name="utilities" value="{{ object.utilities }}"><br>
+                <label for="availability_from">Available from:</label>
+                <input type="date" name="availability_from" value="{{ object.availability_from }}"><br>
+                <label for="availability_to">Available to:</label>
+                <input type="date" name="availability_to" value="{{ object.availability_to }}"><br>
+                <p>
+                <label   for="item_p">Facility type</label>
+                <select  name="item_p" id="" required>
+                  <option value="" disabled selected>None</option>
+                  <option value="land">Land</option>
+                  <option value="Office space">Office Spaces</option>
+                  <option value="room">Rooms/ Houses/ Apartment</option>
+                  <option value="event">Event Center</option>
+                  <option value="conference">Conference Rooms</option>
+                </select>
+            </p>
+            
+                <label for="">Maximum time for rent</label>
+                <p>
+                <select name="period" id="" >
+                    <option value="" disabled selected>None</option>
+                    <option value="days">Days</option>
+                    <option value="months">Months</option>
+                    <option value="years">Years</option>
+                    </select>
+                    <input placeholder="Number" name="maxtime" type="number">       
+              
+                </p>
     
+                <button type="submit">Save</button>
+            </form>
+        
+        </div>
     </div>
+
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
@@ -147,5 +177,4 @@
         });
     });
 </script>
-</html>
 {% endblock %}
