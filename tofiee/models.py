@@ -3,7 +3,9 @@ from datetime import datetime
 from multiselectfield import MultiSelectField
 from django.utils.text import slugify
 import uuid
+from django.utils import timezone
 
+current_date = timezone.localdate()
 
 # Create your models here.
 class Member(models.Model):
@@ -34,8 +36,8 @@ class Member(models.Model):
   document_a = models.FloatField(max_length=100, default=0)
   document_b = models.FloatField(max_length=100, default=0)
   document_c = models.FloatField(max_length=100, default=0)
-  availability_from = models.DateField(max_length=100, default=datetime.now(),  blank=True)
-  availability_to = models.DateField(max_length=100, default=datetime.now(), blank=True)
+  availability_from = models.DateField(max_length=100, default=current_date,  blank=True)
+  availability_to = models.DateField(max_length=100, default=current_date, blank=True)
   period = models.CharField(max_length=100, default='none', blank=True)
   period_number = models.FloatField(max_length=100, default=0, blank=True)
   facility = models.CharField(max_length=100, default='none', blank=True)
