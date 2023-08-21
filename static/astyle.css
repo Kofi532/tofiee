@@ -244,6 +244,8 @@ color:#d8325d;
 
 .main_text_box{
 padding:5px;
+width: auto;
+text-align: center;
 }
 .proposal{
 width:287px;
@@ -255,8 +257,8 @@ margin-top:15px;
 }
 .title{
 background-color:#385870;
-text-align:left;
-width:80%;
+text-align: center;
+width:100%;
 padding:5px 5px 5px 20px;
 color:#FFFFFF;
 font-weight:bold;
@@ -264,7 +266,7 @@ font-size: 15px;
 }
 .small_title{
 background-color:#385870;
-text-align:left;
+text-align:center;
 width:100%;
 padding:5px 5px 5px 15px;
 color:#FFFFFF;
@@ -321,14 +323,15 @@ height:106px;
 background-color:#f3f5f6;
 padding:10px;
 margin:10px 0px 10px 0px;
+
 }
 .offer_box_wide{
 width:310px;
-height:106px;
+height:140px;
 float:left;
 background-color:#f3f5f6;
 padding:10px;
-margin:7px;
+margin:auto;
 }
 .offer_box_wide_style1{
 width:670px;

@@ -1,50 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
 {% load static %}
+<div class="col-6">
+    <div class="main_text_box">
+        <h2>About Us</h2>
+        <p> &quot;We provide credible online real estate platform for our customers to find a comfortable home to buy in Africa
+          and also help increase sales for the real estate developers.
+          We also make sure that, serving humanity is centered in our heart, in order to give customers quality customer
+          services in the real estate market.
+          <br>
+          A. We give our clients easy access transport services to help them convey their properties to their new homes.
+          <br>
+          B. We help our customers solve their domestic problems such as house cleaning, house
+          helps and many more.
+          <br>
+          C. We help our customers to avoid irrelevant spending liking viewing fee which is charged by the other
+          middlemen in the industry. <br />
+        </p>
+      </div>
+      <div class="main_text_box">
+        <br>
+        <h2>Vision</h2>
+        <p> &quot;We are the most trustworthy and credible real estate company that provides comfortable and affordable housing
+          for high, middle and low-income earners in the next five years of business activities.
+          <br>
+          Tofiee.com will be the only platform to serve the real estate market that investors around the world who wants
+          to invest and acquire a property in Africa will trust to do business with. Also, tofiee.com will solve the problem
+          of land litigation in the African continent.            
+        </p>
+      </div>
+  </div>
+  <div class="col">
+    3 of 3
+  </div>
 
-<!-- expand_image.html -->
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Expand Image</title>
-    <style>
-        /* Styling for the expanded image */
-        .expanded-image {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-        }
-
-        .expanded-image img {
-            max-width: 80%;
-            max-height: 80%;
-        }
-    </style>
-</head>
-<body>
-    <h1>Click the Image to Expand</h1>
-    <img src="{% static 'tofie.jpg' %}" alt="Image" onclick="expandImage(this)">
-    <div class="expanded-image" onclick="closeExpandedImage()">
-        <img id="expanded-img" src="" alt="Expanded Image">
-    </div>
-
-    <script>
-        function expandImage(img) {
-            var expandedImg = document.getElementById("expanded-img");
-            expandedImg.src = img.src;
-            var expandedImageContainer = document.querySelector(".expanded-image");
-            expandedImageContainer.style.display = "flex";
-        }
-
-        function closeExpandedImage() {
-            var expandedImageContainer = document.querySelector(".expanded-image");
-            expandedImageContainer.style.display = "none";
-        }
-    </script>
-</body>
-</html>
+{% endblock %}

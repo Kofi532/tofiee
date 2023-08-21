@@ -70,6 +70,26 @@ def sell(request):
     return render (request=request, template_name="sell.html", context={"member":member})
 
 def buy(request):
+    if request.method == "POST":
+        region_ = request.POST.get('region')
+        city_ = request.POST.get('district')
+        price_from_ = request.POST.get('price_from') 
+        price_to_ = request.POST.get('price_to') 
+        room_ = request.POST.get('rooms') 
+        words = region_.split('_')
+        capitalized_words = [word.capitalize() if i == 0 else word for i, word in enumerate(words)]
+        output_string = ' '.join(capitalized_words)
+        words = city_.split()
+        capitalized_city = [word.capitalize() for word in words]
+        capitalized_string = ' '.join(capitalized_city)
+        if room_ == None:
+                r=2
+                drop = Member.objects.filter(region__icontains=output_string).filter(city__icontains=capitalized_string).filter(category__icontains='rent').filter(price__gte=price_from_, price__lte=price_to_)
+        else:
+                r=3
+                drop = Member.objects.filter(region__icontains=output_string).filter(city__icontains=capitalized_string).filter(rooms=room_).filter(category__icontains='rent').filter(price__gte=price_from_, price__lte=price_to_)
+        return render (request=request, template_name="rent.html", context={"member":drop})
+
     member = Member.objects.all().order_by('-date')
     return render (request=request, template_name="buy.html", context={"member":member})
 

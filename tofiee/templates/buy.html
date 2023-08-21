@@ -1,20 +1,120 @@
 {% extends "base.html" %}
 {% block content %}
 {% load static %}
+<style>
+  label{
+    font-size: 15px;
+  }
+  .wrapper {
+    background-color: #B9D9EB;
+    list-style-type: none;
+    padding: 0;
+    border-radius: 3px;
+  }
+  .form-row {
+    display: flex;
+    justify-content: flex-end;
+    padding: .5em;
+  }
+  .form-row > label {
+    padding: .5em 1em .5em 0;
+    flex: 1;
+  }
+  .form-row > input {
+    flex: 1;
+  }
+  .form-row > input,
+  .form-row > button {
+    padding: .5em;
+  }
+  .form-row > button {
+   background: gray;
+   color: white;
+   border: 0;
+  }
+</style>
+<div class="row">
+  <div  class="col-md-6 offset-md-3">
+ 
+    <form method="post">
+      {% csrf_token %}
+    <ul class="wrapper">
+      <li class="form-row">
+        <label for="region" >Select Region:</label>
+        <select id="region" name="region" required>
+          <option value="none" disabled selected>None</option>
+          <option value="ashanti">Ashanti Region</option>
+          <option value="bono">Bono Region</option>
+          <option value="bono_east">Bono East Region</option>
+          <option value="ahafo">Ahafo Region</option>
+          <option value="central">Central Region</option>
+          <option value="eastern">Eastern Region</option>
+          <option value="greater_accra">Greater Accra Region</option>
+          <option value="northern">Northern Region</option>
+          <option value="north_east">North East Region</option>
+          <option value="oti">Oti Region</option>
+          <option value="savannah">Savannah Region</option>
+          <option value="upper_east">Upper East Region</option>
+          <option value="upper_west">Upper West Region</option>
+          <option value="volta">Volta Region</option>
+          <option value="western">Western Region</option>
+          <option value="western_north">Western North Region</option>
+  <!-- Add more regions -->
+        </select>
+      </li>
+      <li class="form-row">
+        <label for="district" >Select District:</label>
+        <select id="district" name="district" required>
+            <!-- District options will be dynamically added here -->
+        </select>
+      </li>
+      <li class="form-row">
+        <label >Price from (GHC): </label>
+        <input type="number" name="price_from" class="form_input" value="minimum" required/>
+      </li>
+      <li class="form-row">
+        <label >Price to (GHC): </label>
+        <input type="number" name="price_to" class="form_input" value="maximum" required/>
+      </li>
+      <li class="form-row">
+        <label >Rooms (Optional): </label>
+        <input type="number" name="rooms" class="form_input" />
+      </li>
+      <li class="form-row">
+        <label   for="item_p">Facility type</label>
+        <select  name="item_p" id="" required>
+          <option value="" disabled selected>None</option>
+          <option value="land">Land</option>
+          <option value="Office space">Office Spaces</option>
+          <option value="room">Rooms/ Houses/ Apartment</option>
+          <option value="event">Event Center</option>
+          <option value="conference">Conference Rooms</option>
+        </select>
+          </li>
+  
+            <li class="form-row">
+        <button type="submit">Submit</button>
+      </li>
+    </ul>
+  </form>
+  </div>
+  <div class="">
 
-<div class="column4">
-    <div class="title" style="float:left;">
-      <div style="float:left;">Buying Properties</div>
-      <!-- <div style="float:right; font-size:10px;color:#d8325d;padding-top:2px;">display: <a href="list2.html"><img src="images/list_style3.gif" border="0" /></a> <a href="list1.html"><img src="images/list_style1.gif" border="0" /></a> <a href="list.html"><img src="images/list_style2_a.gif" border="0" /></a> </div> -->
-    </div>
+  </div>
+  <div class="row">
+    <div class="title" style="float:left;">Buying Properties</div>
     {% for i in member %}
     <div class="offer_box_wide"> <a href="#"><img src="{{ i.dp.url }}" width="130" height="98" class="img_left" alt="" border="0"/></a>
       <div class="offer_info"> <span>GHC {{ i.price }} </span>
         <p class="titl"> {{ i.city }}, {{ i.region }}</p>
-        <p class="titl"> {{ i.description|truncatewords:7 }}</p>
+        <!-- <p class="titl"> {{ i.description|truncatewords:7 }}</p> -->
         <div class="more"><a href="{% url 'post_detail' i.slug  %}">...more</a></div>
       </div>
     </div>
+  
     {% endfor %}
 
+  </div>
+      <!-- <div style="float:right; font-size:10px;color:#d8325d;padding-top:2px;">display: <a href="list2.html"><img src="images/list_style3.gif" border="0" /></a> <a href="list1.html"><img src="images/list_style1.gif" border="0" /></a> <a href="list.html"><img src="images/list_style2_a.gif" border="0" /></a> </div> -->
+  </div>
     {% endblock %}

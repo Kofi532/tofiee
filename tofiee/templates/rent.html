@@ -1,4 +1,4 @@
-{% extends "baserent.html" %}
+{% extends "base.html" %}
 {% block content %}
 {% load static %}
 
@@ -7,7 +7,7 @@
     font-size: 15px;
   }
   .wrapper {
-    background-color: whitesmoke;
+    background-color: #B9D9EB;
     list-style-type: none;
     padding: 0;
     border-radius: 3px;
@@ -22,7 +22,7 @@
     flex: 1;
   }
   .form-row > input {
-    flex: 2;
+    flex: 1;
   }
   .form-row > input,
   .form-row > button {
@@ -34,9 +34,8 @@
    border: 0;
   }
 </style>
-<body>
-  <div class="column4">
-
+  <div class="row">
+    <div  class="col-md-6 offset-md-3">
  
   <form method="post">
     {% csrf_token %}
@@ -111,32 +110,29 @@
     </li>
   </ul>
 </form>
-
-<div class="title" style="float:left;">
-  <div style="float:left;">Rents</div>
-  <!-- <div style="float:right; font-size:10px;color:#d8325d;padding-top:2px;">display: <a href="list2.html"><img src="images/list_style3.gif" border="0" /></a> <a href="list1.html"><img src="images/list_style1.gif" border="0" /></a> <a href="list.html"><img src="images/list_style2_a.gif" border="0" /></a> </div> -->
 </div>
 
-
+<div class="row">
+  <div class="title" style="float:left;">
+    <div style="float:left;">Rents</div>
+    <!-- <div style="float:right; font-size:10px;color:#d8325d;padding-top:2px;">display: <a href="list2.html"><img src="images/list_style3.gif" border="0" /></a> <a href="list1.html"><img src="images/list_style1.gif" border="0" /></a> <a href="list.html"><img src="images/list_style2_a.gif" border="0" /></a> </div> -->
+  </div>
   {% for i in member %}
-
   <div class="offer_box_wide"> <a href="#"><img src="{{ i.dp.url }}" width="130" height="98" class="img_left" alt="" border="0"/></a>
     <div class="offer_info"> <span>For Sale GHC {{ i.price }}</span>
       <p class="titl"> {{ i.city }}, {{ i.region }}</p>
-      <p class="titl"> {{ i.description|truncatewords:7  }}</p>
+      <!-- <p class="titl"> {{ i.description|truncatewords:7  }}</p> -->
       <div class="more"><a href="{% url 'post_detail' i.slug  %}">...more</a></div>
     </div>
   </div>
   {% endfor %}
+
+</div>
 </div>
 
 <!-- here -->
 
 
-
-
-
-</body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
@@ -184,6 +180,6 @@
 
 
 
-</body>
+
 {% endblock %}
 

@@ -1,75 +1,155 @@
 {% extends "base.html" %}
+{% block content %}
+{% load static %}
+<div class="row">
+  <div class="col">
+    <div class="center_left_box">
+      <div class="box_title"><span>Find</span> your place:</div>
+      <form  method="post">
+        <div class="form">
+            {% csrf_token %}
+            <div class="form_row">
+              <label class="left">Region: </label>
+              <select id="regional" name="regional" required>
+                <option value="none">None</option>
+                <option value="ashanti">Ashanti Region</option>
+                <option value="bono">Bono Region</option>
+                <option value="bono_east">Bono East Region</option>
+                <option value="ahafo">Ahafo Region</option>
+                <option value="central">Central Region</option>
+                <option value="eastern">Eastern Region</option>
+                <option value="greater_accra">Greater Accra Region</option>
+                <option value="northern">Northern Region</option>
+                <option value="north_east">North East Region</option>
+                <option value="oti">Oti Region</option>
+                <option value="savannah">Savannah Region</option>
+                <option value="upper_east">Upper East Region</option>
+                <option value="upper_west">Upper West Region</option>
+                <option value="volta">Volta Region</option>
+                <option value="western">Western Region</option>
+                <option value="western_north">Western North Region</option>
+            </select>
+                <!-- <input type="text" name="region" class="form_input"/> -->
+            </div>
+            <div class="form_row">
+              <label class="left">District/ City: </label>
+              <select id="district" name="district" required>
+                <!-- Options will be dynamically generated here -->
+            </select>                
+          </div>
+            <div class="form_row">
+              <label class="left">Price from: </label>
+              <input type="number" name="price_from" class="form_input" value="minimum" required/>
+            </div>
+            <div class="form_row">
+              <label class="left">Price to: </label>
+              <input type="number" name="price_to" class="form_input" value="maximum" required/>
+            </div>
+            <div class="form_row">
+              <label class="left">Rooms: </label>
+              <input type="number" name="rooms" class="form_input" />
+            </div>
+            <div class="form_row">
+              <label class="left_long">Looking for to:</label>
+            </div>
+            <div class="form_row">
+              <input  value="buy" type="radio" name="reason"/>
+              Buy</div>
+            <div class="form_row">
+              <input  value="rent" type="radio" name="reason"/>
+              Rent</div>
+            <div style="float:right; padding:10px 25px 0 0;">
+                <!-- <button type="submit">find</button> -->
+              <input type="submit" src=""/>
+            </div>
+          </div>
+      </form>
 
- {% block content %}
- <style>
-  /* a {
-    font-size: xx-large;
-  } */
- </style>
-            <!-- end of column one -->
-    <div class="column2">
-        <div class="main_text_box">
-          <h2>About Us</h2>
-          <p> &quot;We provide credible online real estate platform for our customers to find a comfortable home to buy in Africa
-            and also help increase sales for the real estate developers.
-            We also make sure that, serving humanity is centered in our heart, in order to give customers quality customer
-            services in the real estate market.
-            <br>
-            A. We give our clients easy access transport services to help them convey their properties to their new homes.
-            <br>
-            B. We help our customers solve their domestic problems such as house cleaning, house
-            helps and many more.
-            <br>
-            C. We help our customers to avoid irrelevant spending liking viewing fee which is charged by the other
-            middlemen in the industry. <br />
-          </p>
+    </div>
+    <div class="left_box">
+      <div class="top_left_box"> </div>
+      <div class="center_left_box">
+        <div class="box_title"><span>Join</span> our newsletter:</div>
+        <div class="form">
+          <div class="form_row">
+            <a id="showPopupBtn" class="left" href="#">Yes i want to.</a>
+            <div id="popup" class="popup">
+              <p>Thank you for subscribing.</p>
+              <button id="closePopupBtn">Close</button>
+          </div>
+          </div>
+
         </div>
-        <div class="main_text_box">
-          <br>
-          <h2>Vision</h2>
-          <p> &quot;We are the most trustworthy and credible real estate company that provides comfortable and affordable housing
-            for high, middle and low-income earners in the next five years of business activities.
-            <br>
-            Tofiee.com will be the only platform to serve the real estate market that investors around the world who wants
-            to invest and acquire a property in Africa will trust to do business with. Also, tofiee.com will solve the problem
-            of land litigation in the African continent.            
-          </p>
-        </div>
-        </div>
-      <!-- end of column two -->
-      <div class="column3">
+      </div>
+      <div class="bottom_left_box"> </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="main_text_box">
+      <h2>About Us</h2>
+      <p>We provide credible online real estate platform for our customers to find a comfortable home to buy in Africa
+        and also help increase sales for the real estate developers.
+        We also make sure that, serving humanity is centered in our heart, in order to give customers quality customer
+        services in the real estate market.
+        <br>
+        A. We give our clients easy access transport services to help them convey their properties to their new homes.
+        <br>
+        B. We help our customers solve their domestic problems such as house cleaning, house
+        helps and many more.
+        <br>
+        C. We help our customers to avoid irrelevant spending liking viewing fee which is charged by the other
+        middlemen in the industry. <br />
+      </p>
+    </div>
+    <div class="main_text_box">
+      <br>
+      <h2>Vision</h2>
+      <p>We are the most trustworthy and credible real estate company that provides comfortable and affordable housing
+        for high, middle and low-income earners in the next five years of business activities.
+        <br>
+        Tofiee.com will be the only platform to serve the real estate market that investors around the world who wants
+        to invest and acquire a property in Africa will trust to do business with. Also, tofiee.com will solve the problem
+        of land litigation in the African continent.            
+      </p>
+    </div>
+    </div>
+    <div class="col">
         <div class="small_title">Latest offers</div>
         {% for i in member %}
         <div  class="offer_box"> <a  href="#"><img src="{{ i.dp.url }}" width="130" height="98" class="img_left" alt="image" border="0" /></a>
           <div  class="offer_info"> <span>GHC {{ i.price }}</span>
               <p class="titl">Location: {{ i.city }}, {{ i.region }} </p>
-            <p class="titl"  style="overflow: hidden;"> &quot;{{ i.title }}&quot; </p>
+            <!-- <p class="titl"  style="overflow: hidden;"> &quot;{{ i.title }}&quot; </p> -->
             <div class="more"><a href="{% url 'post_detail' i.slug  %}">...more</a></div>
-  
+    
           </div>
-        </div>
-
+      </div>
+      {% endfor %} 
+      
+      </div>
+      <div class="row">
+    
+          <div class="title">Special Offers</div>
+          {% for i in members %}
+          <div  class="offer_box_wide"> <a style="font-size: larger;" href="#"><img src="{{ i.dp.url }}" width="130" height="98" class="img_left" alt="image" border="0" /></a>
+          <!-- <div class="offer_box_wide"> <a href="#"><img src="images/p1.jpg" width="130" height="98" class="img_left" alt="" border="0" /></a> -->
+            <div  class="offer_info"> <span>GHC {{ i.price }}</span>
+              <p class="titl">Location: {{ i.city }}, {{ i.region }} </p>
+            <!-- <p class="titl"  style="overflow: hidden;"> &quot;{{ i.title }}&quot; </p> -->
+            <div class="more"><a href="{% url 'post_detail' i.slug  %}">...more</a></div>
         
-        {% endfor %} 
+          </div>
+          </div>
+          {% endfor %} 
+        
+    
       </div>
-      <!-- end of column three -->
-      <div class="column4">
 
-        <div class="title">Special Offers</div>
-        {% for i in members %}
-        <div  class="offer_box_wide"> <a style="font-size: larger;" href="#"><img src="{{ i.dp.url }}" width="130" height="98" class="img_left" alt="image" border="0" /></a>
-        <!-- <div class="offer_box_wide"> <a href="#"><img src="images/p1.jpg" width="130" height="98" class="img_left" alt="" border="0" /></a> -->
-          <div  class="offer_info"> <span>GHC {{ i.price }}</span>
-            <p class="titl">Location: {{ i.city }}, {{ i.region }} </p>
-          <p class="titl"  style="overflow: hidden;"> &quot;{{ i.title }}&quot; </p>
-          <div class="more"><a href="{% url 'post_detail' i.slug  %}">...more</a></div>
 
-        </div>
-        </div>
-        {% endfor %} 
 
-      </div>
-      <!-- end of column four -->
-    <!-- end of main_content -->
+</div>
+<!-- screen -->
 
-        {% endblock %}
+  
+{% endblock %}
+
