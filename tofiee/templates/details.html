@@ -1,4 +1,3 @@
-
 {% extends "base.html" %}
 {% block content %}
 {% load static %}
@@ -23,16 +22,19 @@
 	max-height: 80%;
 }
 </style>
-<div class="column4">
-  {% if object.category == 'sell' %}
-    <div class="title">For Sale: {{ object.title }}</div>
-    {% elif object.category == 'rent' %}
-    <div class="title">For Rent: {{ object.title }}</div>
-    {% else %}
-    {% endif %}
-  </div>
-  <!-- end of column four -->
-  <div class="column2" style="background-color:#f3f5f6; margin-left:5px;">
+  <div class="col-md-6 offset-md-3">
+    {% if object.category == 'sell' %}
+      <div class="title">For Sale: {{ object.title }}</div>
+      {% elif object.category == 'rent' %}
+      <div class="title">For Rent: {{ object.title }}</div>
+      {% else %}
+      {% endif %}
+    </div>
+
+<div class="row">
+  <div class="col">
+    <br>
+  <div class="" style="background-color:#f3f5f6; margin-left:5px;">
     <div class="big_pic"><img src="{{ object.dp.url }}" onclick="expandImage(this)" width="282" height="212" alt="" class="img_big_pic" /></div>
     <div class="expanded-image" onclick="closeExpandedImage()">
         <img id="expanded-img" src="" alt="Expanded Image">
@@ -41,12 +43,14 @@
       <h3>Pictures available:</h3>
       <a href="#"><img src="{{ object.pic1.url }}" onclick="expandImage(this)" width="104" height="78" border="0" alt="" class="img_thumb" /></a> <a href="#"><img src="{{ object.pic2.url }}" onclick="expandImage(this)" width="104" height="78" border="0" alt="" class="img_thumb" /></a> <a href="#"><img src="{{ object.pic3.url }}" onclick="expandImage(this)" width="104" height="78" border="0" alt="" class="img_thumb" /></a> <a href="#"><img src="{{ object.pic4.url }}" onclick="expandImage(this)" width="104" height="78" border="0" alt="" class="img_thumb" /></a> <a href="#"><img src="{{ object.pic5.url }}" onclick="expandImage(this)" width="104" height="78" border="0" alt="" class="img_thumb" /></a> <a href="#"><img src="{{ object.pic6.url }}" onclick="expandImage(this)" width="104" height="78" border="0" alt="" class="img_thumb" /></a> </div>
   </div>
-  <!-- end of column two -->
-  <div class="column3">
+</div>
+
+
+  <div class="col">
     <div class="main_text_box">
       <h1>Description</h1>
       <p><b>Location: {{ object.city }}, {{ object.region }} Region </b></p>
-      <p>{{ object.description }}&quot;</p>
+      <p>{{ object.description }}</p>
       
                 <br />
     </div>
@@ -72,19 +76,19 @@
     <div style="float:left; padding-left:150px;"><a href="#"><img src="{% static 'images/print.gif' %}" width="28" height="28" border="0" alt="print this offer" title="print this offer" /></a> </div>
     <!-- end of column three -->
   </div>
-  <!-- end of main_content -->
 
-  <script>
-    function expandImage(img) {
-        var expandedImg = document.getElementById("expanded-img");
-        expandedImg.src = img.src;
-        var expandedImageContainer = document.querySelector(".expanded-image");
-        expandedImageContainer.style.display = "flex";
-    }
+</div>
+<script>
+  function expandImage(img) {
+      var expandedImg = document.getElementById("expanded-img");
+      expandedImg.src = img.src;
+      var expandedImageContainer = document.querySelector(".expanded-image");
+      expandedImageContainer.style.display = "flex";
+  }
 
-    function closeExpandedImage() {
-        var expandedImageContainer = document.querySelector(".expanded-image");
-        expandedImageContainer.style.display = "none";
-    }
+  function closeExpandedImage() {
+      var expandedImageContainer = document.querySelector(".expanded-image");
+      expandedImageContainer.style.display = "none";
+  }
 </script>
 {% endblock %}

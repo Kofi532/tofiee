@@ -1,3 +1,5 @@
+{% extends "base.html" %}
+{% block content %}
 {% load static %}
 {% load crispy_forms_tags %}
 
@@ -52,8 +54,7 @@
     </style>
 </head>
     
-    <body>
-        <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+        <!-- <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
             <div class="container-fluid">
               <ul class="nav navbar-nav">
                 <li><a href="/">Home</a></li>
@@ -62,7 +63,7 @@
                   </li>
               </ul>
             </div>
-          </nav>
+          </nav> -->
         <div class="column4">
             <div class="container">
                 <form method="post" enctype="multipart/form-data">
@@ -146,7 +147,6 @@
             </div>
     
 
-    </body>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function () {
@@ -188,8 +188,7 @@
             });
         });
     </script>
-</html>
-
+{% endblock %}
 
 
 
